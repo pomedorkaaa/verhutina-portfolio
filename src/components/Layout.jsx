@@ -18,9 +18,11 @@ export default function Layout({ title, pageName = "home", children }) {
         <script defer src="/assets/js/main.js"></script>
         <script defer src="/assets/js/vendor/checkVendorUpdates.js"></script>
       </Head>
-      <Header />
-      {children}
-      <Footer />
+      <Header pageName={pageName} />
+      <main id="page-content">
+        {children}
+        <Footer />
+      </main>
     </>
   );
 }
