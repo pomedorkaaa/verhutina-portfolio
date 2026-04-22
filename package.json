@@ -2,14 +2,22 @@
   "name": "portfolio-4",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tailwindcss -i ./assets/css/input.css -o ./dist/output.css --watch",
-    "build": "tailwindcss -i ./assets/css/input.css -o ./dist/output.css --minify"
+    "dev": "minista",
+    "build": "minista build",
+    "preview": "minista preview"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.0"
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^3.4.19"
   },
   "dependencies": {
     "baseline-browser-mapping": "^2.10.20",
-    "caniuse-lite": "^1.0.30001790"
-  }
+    "caniuse-lite": "^1.0.30001790",
+    "gsap": "^3.15.0",
+    "minista": "^3.1.12",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "type": "module"
 }
