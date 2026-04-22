@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 export default function Page() {
   return (
     <Layout title="" pageName="home">
-      <main className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
+      <main id="page-content" className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
         {/* HERO */}
     <section className="hero !sticky top-0 -z-40 min-h-screen px-5 flex flex-col justify-center items-center">
       <div className="text-center">
@@ -70,7 +70,7 @@ export default function Page() {
 
         <div className="about-photo" data-reveal-up>
           <div className="overflow-hidden aspect-[3/4]">
-            <img src="assets/images/verhutina.webp" alt="Верхутина Мария"
+            <img src="/assets/images/verhutina.webp" alt="Верхутина Мария"
               className="w-full h-full object-cover photo-parallax" />
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function Page() {
           <a href="pages/cases/futurist/index.html" className="case-card group block relative" data-case-card
             data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="assets/images/futurist.webp" alt="FUTURIST"
+              <img src="/assets/images/futurist.webp" alt="FUTURIST"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -107,7 +107,7 @@ export default function Page() {
           <a href="pages/cases/tierra-viva/index.html" className="case-card group block relative" data-case-card
             data-reveal-up>
             <div className="overflow-hidden aspect-video">
-              <img src="assets/images/tierra-viva.webp" alt="Tierra Viva"
+              <img src="/assets/images/tierra-viva.webp" alt="Tierra Viva"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -120,7 +120,7 @@ export default function Page() {
           <a href="pages/cases/casa-nomad/index.html" className="case-card group block relative" data-case-card
             data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="assets/images/casa-nomad.webp" alt="Casa Nomad"
+              <img src="/assets/images/casa-nomad.webp" alt="Casa Nomad"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -132,7 +132,7 @@ export default function Page() {
 
           <a href="pages/cases/alba/index.html" className="case-card group block relative" data-case-card data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="assets/images/alba.webp" alt="Alba"
+              <img src="/assets/images/alba.webp" alt="Alba"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>

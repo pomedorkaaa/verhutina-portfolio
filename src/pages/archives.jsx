@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 export default function Page() {
   return (
     <Layout title="Галерея" pageName="archives">
-      <main className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
+      <main id="page-content" className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
         {/* ARCHIVES PAGE */}
     <section className="min-h-screen pt-28 pb-20 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
@@ -12,35 +12,35 @@ export default function Page() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-[26px]">
           <div className="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
-            <img src="../../assets/images/futurist.webp" alt="001"
+            <img src="/assets/images/futurist.webp" alt="001"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </div>
           <div className="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
-            <img src="../../assets/images/tierra-viva.webp" alt="002"
+            <img src="/assets/images/tierra-viva.webp" alt="002"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </div>
           <div className="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
-            <img src="../../assets/images/casa-nomad.webp" alt="003"
+            <img src="/assets/images/casa-nomad.webp" alt="003"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </div>
           <div className="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
-            <img src="../../assets/images/alba.webp" alt="004"
+            <img src="/assets/images/alba.webp" alt="004"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </div>
           <div className="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
-            <img src="../../assets/images/verhutina.webp" alt="005"
+            <img src="/assets/images/verhutina.webp" alt="005"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </div>
           <div className="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
-            <img src="../../assets/images/tierra-viva.webp" alt="006"
+            <img src="/assets/images/tierra-viva.webp" alt="006"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </div>
           <div className="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
-            <img src="../../assets/images/futurist.webp" alt="007"
+            <img src="/assets/images/futurist.webp" alt="007"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </div>
           <div className="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
-            <img src="../../assets/images/casa-nomad.webp" alt="008"
+            <img src="/assets/images/casa-nomad.webp" alt="008"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
           </div>
         </div>

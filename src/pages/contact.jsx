@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 export default function Page() {
   return (
     <Layout title="Контакты" pageName="contact">
-      <main className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
+      <main id="page-content" className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
         {/* CONTACT PAGE */}
     <section className="min-h-screen pt-28 pb-20 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">

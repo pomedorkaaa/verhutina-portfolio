@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 export default function Page() {
   return (
     <Layout title="Кейсы" pageName="works">
-      <main className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
+      <main id="page-content" className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
         {/* WORKS PAGE */}
     <section className="min-h-screen pt-28 pb-20 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
@@ -41,7 +41,7 @@ export default function Page() {
           <a href="../cases/futurist/index.html" className="case-card group block relative" data-case-card
             data-tags="digital,marketing-materials" data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="../../assets/images/futurist.webp" alt="FUTURIST"
+              <img src="/assets/images/futurist.webp" alt="FUTURIST"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -54,7 +54,7 @@ export default function Page() {
           <a href="../cases/tierra-viva/index.html" className="case-card group block relative" data-case-card
             data-tags="visual-identity,brand-strategy" data-reveal-up>
             <div className="overflow-hidden aspect-video">
-              <img src="../../assets/images/tierra-viva.webp" alt="Tierra Viva"
+              <img src="/assets/images/tierra-viva.webp" alt="Tierra Viva"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -67,7 +67,7 @@ export default function Page() {
           <a href="../cases/casa-nomad/index.html" className="case-card group block relative" data-case-card
             data-tags="art-direction,digital" data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="../../assets/images/casa-nomad.webp" alt="Casa Nomad"
+              <img src="/assets/images/casa-nomad.webp" alt="Casa Nomad"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -80,7 +80,7 @@ export default function Page() {
           <a href="../cases/alba/index.html" className="case-card group block relative" data-case-card
             data-tags="brand-strategy,visual-identity" data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="../../assets/images/alba.webp" alt="Alba"
+              <img src="/assets/images/alba.webp" alt="Alba"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -93,7 +93,7 @@ export default function Page() {
           <a href="../cases/luz-de-tierra/index.html" className="case-card group block relative" data-case-card
             data-tags="packaging,brand-strategy" data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="../../assets/images/tierra-viva.webp" alt="Luz de Tierra"
+              <img src="/assets/images/tierra-viva.webp" alt="Luz de Tierra"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -106,7 +106,7 @@ export default function Page() {
           <a href="../cases/la-mesa/index.html" className="case-card group block relative" data-case-card
             data-tags="marketing-materials,packaging" data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="../../assets/images/casa-nomad.webp" alt="La Mesa"
+              <img src="/assets/images/casa-nomad.webp" alt="La Mesa"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>

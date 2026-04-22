@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 export default function Page() {
   return (
     <Layout title="Alba" pageName="case-alba">
-      <main className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
+      <main id="page-content" className="page-content pt-24 md:pt-32 pb-16 min-h-screen">
         <section className="min-h-screen pt-28 pb-12 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <h1 className="text-[32px] md:text-[40px] lg:text-[48px] font-medium tracking-tighter-custom uppercase mb-2"
@@ -11,7 +11,7 @@ export default function Page() {
         <p className="text-[16px] font-medium tracking-tight-custom text-muted mb-12" data-reveal-up>Crafting a sanctuary of
           minimalism and nature</p>
         <div className="overflow-hidden aspect-[4/5]" data-reveal-up>
-          <img src="../../../assets/images/alba.webp" alt="Alba"
+          <img src="/assets/images/alba.webp" alt="Alba"
             className="w-full h-full object-cover case-hero-parallax" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
@@ -61,7 +61,7 @@ export default function Page() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-[26px]">
           <a href="../futurist/index.html" className="case-card group block relative" data-case-card data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="../../../assets/images/futurist.webp" alt="FUTURIST"
+              <img src="/assets/images/futurist.webp" alt="FUTURIST"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -72,7 +72,7 @@ export default function Page() {
           </a>
           <a href="../tierra-viva/index.html" className="case-card group block relative" data-case-card data-reveal-up>
             <div className="overflow-hidden aspect-video">
-              <img src="../../../assets/images/tierra-viva.webp" alt="Tierra Viva"
+              <img src="/assets/images/tierra-viva.webp" alt="Tierra Viva"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
@@ -83,7 +83,7 @@ export default function Page() {
           </a>
           <a href="../casa-nomad/index.html" className="case-card group block relative" data-case-card data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="../../../assets/images/casa-nomad.webp" alt="Casa Nomad"
+              <img src="/assets/images/casa-nomad.webp" alt="Casa Nomad"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
