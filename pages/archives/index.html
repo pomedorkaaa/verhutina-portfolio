@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <title>ГАЛЕРЕЯ — ВЕРХУТИНА МАРИЯ</title>
+
+  <link rel="stylesheet" href="../../assets/fonts/Inter/font-Inter.css">
+  <link rel="stylesheet" href="../../dist/output.css">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <script>if (sessionStorage.getItem('page-transitioning')) { sessionStorage.removeItem('page-transitioning'); document.documentElement.classList.add('page-entering') }</script>
+</head>
+
+<body class="bg-bg text-primary font-sans antialiased overflow-x-hidden" data-page="archives">
+
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-10 py-4 ">
+    <a href="../../index.html" class="text-[15px] font-semibold tracking-tight-custom uppercase absolute">Мария©</a>
+
+    <ul class="hidden md:flex items-center flex-grow justify-center gap-6">
+      <li><a href="../../index.html"
+          class="nav-link text-[15px] font-normal tracking-tight-custom uppercase text-primary/50 hover:text-primary transition-colors">ГЛАВНАЯ</a>
+      </li>
+      <li><a href="../works/index.html"
+          class="nav-link text-[15px] font-normal tracking-tight-custom uppercase text-primary/50 hover:text-primary transition-colors">КЕЙСЫ</a>
+      </li>
+      <li><a href="../archives/index.html"
+          class="nav-link text-[15px] font-normal tracking-tight-custom uppercase text-primary">ГАЛЕРЕЯ</a></li>
+      <li><a href="../contact/index.html"
+          class="nav-link text-[15px] font-normal tracking-tight-custom uppercase text-primary/50 hover:text-primary transition-colors">КОНТАКТЫ</a>
+      </li>
+    </ul>
+
+
+
+    <button id="menu-toggle" class="md:hidden text-[15px] font-normal tracking-tight-custom uppercase text-primary"
+      aria-label="Menu">Menu</button>
+  </nav>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div id="mobile-menu"
+    class="fixed inset-0 z-40 bg-bg flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none ">
+    <a href="../../index.html"
+      class="mobile-nav-link text-[15px] font-normal tracking-tight-custom uppercase text-primary/80 hover:text-primary transition-colors">ГЛАВНАЯ</a>
+    <a href="../works/index.html"
+      class="mobile-nav-link text-[15px] font-normal tracking-tight-custom uppercase text-primary/80 hover:text-primary transition-colors">КЕЙСЫ</a>
+    <a href="../archives/index.html"
+      class="mobile-nav-link text-[15px] font-normal tracking-tight-custom uppercase text-primary/80 hover:text-primary transition-colors">ГАЛЕРЕЯ</a>
+    <a href="../contact/index.html"
+      class="mobile-nav-link text-[15px] font-normal tracking-tight-custom uppercase text-primary/80 hover:text-primary transition-colors">КОНТАКТЫ</a>
+    <button id="menu-close"
+      class="absolute top-4 right-5 text-[15px] font-normal tracking-tight-custom uppercase text-primary">Close</button>
+  </div>
+
+  <main id="page-content">
+
+    <!-- ARCHIVES PAGE -->
+    <section class="min-h-screen pt-28 pb-20 px-5 md:px-10">
+      <div class="max-w-[1400px] mx-auto">
+        <h1 class="text-[32px] md:text-[40px] lg:text-[48px] font-medium tracking-tighter-custom uppercase mb-16"
+          data-split-text>The archives</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-[26px]">
+          <div class="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
+            <img src="../../assets/images/futurist.webp" alt="001"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+          <div class="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
+            <img src="../../assets/images/tierra-viva.webp" alt="002"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+          <div class="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
+            <img src="../../assets/images/casa-nomad.webp" alt="003"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+          <div class="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
+            <img src="../../assets/images/alba.webp" alt="004"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+          <div class="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
+            <img src="../../assets/images/verhutina.webp" alt="005"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+          <div class="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
+            <img src="../../assets/images/tierra-viva.webp" alt="006"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+          <div class="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
+            <img src="../../assets/images/futurist.webp" alt="007"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+          <div class="archive-item group overflow-hidden aspect-square bg-bg-alt" data-reveal-up>
+            <img src="../../assets/images/casa-nomad.webp" alt="008"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-bg py-16 md:py-24 px-5 md:px-10">
+      <div class="max-w-[1400px] mx-auto">
+        <a href="../contact/index.html"
+          class="inline-block text-[32px] md:text-[40px] lg:text-[48px] font-medium tracking-tighter-custom uppercase hover:opacity-60 transition-opacity mb-10"
+          data-reveal-up>
+          Get in touch
+        </a>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div class="flex gap-6">
+            <a href="mailto:johndoe@gmail.com"
+              class="text-[15px] font-normal tracking-tight-custom uppercase text-muted hover:text-primary transition-colors">Email</a>
+            <a href="https://www.instagram.com/ludoviclosco/" target="_blank" rel="noopener"
+              class="text-[15px] font-normal tracking-tight-custom uppercase text-muted hover:text-primary transition-colors">Instagram</a>
+            <a href="https://www.threads.com/@ludoviclosco" target="_blank" rel="noopener"
+              class="text-[15px] font-normal tracking-tight-custom uppercase text-muted hover:text-primary transition-colors">Threads</a>
+            <a href="https://x.com/ludoviclosco" target="_blank" rel="noopener"
+              class="text-[15px] font-normal tracking-tight-custom uppercase text-muted hover:text-primary transition-colors">X
+              (Twitter)</a>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+  </main> <!-- /page-content -->
+
+  <script defer src="../../assets/js/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../assets/js/main.js"></script>
+  <script defer src="../../assets/js/checkVendorUpdates.js"></script>
+</body>
+
+</html>
