@@ -3,13 +3,12 @@ export default function Footer() {
     <footer className="bg-bg py-16 md:py-24 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <a href="/contact"
-          className="inline-block text-[32px] md:text-[40px] lg:text-[48px] font-medium tracking-tighter-custom uppercase hover:opacity-60 transition-opacity mb-10"
-          data-reveal-up>
+          className="inline-block text-[32px] md:text-[40px] lg:text-[48px] font-medium tracking-tighter-custom uppercase hover:opacity-60 transition-opacity mb-10">
           Get in touch
         </a>
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="flex gap-6" data-reveal-up>
+          <div className="flex flex-wrap gap-6">
             <a href="mailto:johndoe@gmail.com"
               className="text-[15px] font-normal tracking-tight-custom uppercase text-muted hover:text-primary transition-colors">Email</a>
             <a href="https://instagram.com/ludoviclosco" target="_blank" rel="noopener"
