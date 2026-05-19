@@ -437,13 +437,16 @@ function initCursorTrail() {
   container.id = 'cursor-trail-container';
   hero.appendChild(container);
 
-  // Массив изображений для шлейфа (используем те же портфолио-изображения)
+  // Массив изображений для шлейфа (.webp из папки trail)
   const trailImages = [
-    'assets/images/futurist.webp',
-    'assets/images/tierra-viva.webp',
-    'assets/images/casa-nomad.webp',
-    'assets/images/alba.webp',
-    'assets/images/verhutina.webp',
+    'assets/images/trail/IMG_0933.webp',
+    'assets/images/trail/IMG_0938.webp',
+    'assets/images/trail/IMG_0941.webp',
+    'assets/images/trail/IMG_2989.webp',
+    'assets/images/trail/IMG_7781.webp',
+    'assets/images/trail/IMG_7782.webp',
+    'assets/images/trail/IMG_9079.webp',
+    'assets/images/trail/IMG_9370.webp',
   ];
 
   // Предзагрузка изображений
