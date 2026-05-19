@@ -94,7 +94,7 @@ export default function Page() {
 
             <a href="/cases/futurist" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
-                <img src="/assets/images/cases/1.%20futurist.webp" alt="FUTURIST"
+                <img src="/assets/images/cases/1-futurist.webp" alt="FUTURIST"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading="lazy" />
               </div>
@@ -106,7 +106,7 @@ export default function Page() {
 
             <a href="/cases/maison" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
-                <img src="/assets/images/cases/2.%20maison.webp" alt="MAISON ROUGE"
+                <img src="/assets/images/cases/2-maison.webp" alt="MAISON ROUGE"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading="lazy" />
               </div>
@@ -118,7 +118,7 @@ export default function Page() {
 
             <a href="/cases/mouse" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
-                <img src="/assets/images/cases/3.%20mouse.webp" alt="Mouse House"
+                <img src="/assets/images/cases/3-mouse.webp" alt="Mouse House"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading="lazy" />
               </div>
@@ -130,7 +130,7 @@ export default function Page() {
 
             <a href="/cases/zavod" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
-                <img src="/assets/images/cases/4.%20zavod.webp" alt="ZAVOD COFFEE"
+                <img src="/assets/images/cases/4-zavod.webp" alt="ZAVOD COFFEE"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading="lazy" />
               </div>
@@ -142,7 +142,7 @@ export default function Page() {
 
             <a href="/cases/play-cafe" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
-                <img src="/assets/images/cases/5.%20play-cafe.webp" alt="ДЕТСТВО Play Café"
+                <img src="/assets/images/cases/5-play-cafe.webp" alt="ДЕТСТВО Play Café"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading="lazy" />
               </div>
