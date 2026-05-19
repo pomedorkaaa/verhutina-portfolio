@@ -38,87 +38,68 @@ export default function Page() {
         {/* CASES GRID */}
         <div className="cases-grid grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-[26px]" id="cases-grid">
 
-          <a href="../cases/futurist/index.html" className="case-card group block relative" data-case-card
-            data-tags="digital,marketing-materials" data-reveal-up>
+          <a href="../cases/futurist/index.html" className="case-card group block relative" data-case-card data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="/assets/images/futurist.webp" alt="FUTURIST"
+              <img src="/assets/images/cases/1.%20futurist.webp" alt="FUTURIST"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
             <div className="mt-4">
               <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">FUTURIST</h3>
-              <p className="text-muted text-[14px] mt-1">Digital, Marketing Materials</p>
+              <p className="text-muted text-[14px] mt-1">Авторский ресторан</p>
             </div>
           </a>
 
-          <a href="../cases/tierra-viva/index.html" className="case-card group block relative" data-case-card
-            data-tags="visual-identity,brand-strategy" data-reveal-up>
+          <a href="../cases/maison/index.html" className="case-card group block relative" data-case-card data-reveal-up>
+            <div className="overflow-hidden aspect-[4/5]">
+              <img src="/assets/images/cases/2.%20maison.webp" alt="MAISON ROUGE"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                loading="lazy" />
+            </div>
+            <div className="mt-4">
+              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">MAISON ROUGE</h3>
+              <p className="text-muted text-[14px] mt-1">Премиальный рестоклуб</p>
+            </div>
+          </a>
+
+          <a href="../cases/mouse/index.html" className="case-card group block relative" data-case-card data-reveal-up>
+            <div className="overflow-hidden aspect-[4/5]">
+              <img src="/assets/images/cases/3.%20mouse.webp" alt="Mouse House"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                loading="lazy" />
+            </div>
+            <div className="mt-4">
+              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">Mouse House</h3>
+              <p className="text-muted text-[14px] mt-1">Семейный ресторан и клуб</p>
+            </div>
+          </a>
+
+          <a href="../cases/zavod/index.html" className="case-card group block relative" data-case-card data-reveal-up>
             <div className="overflow-hidden aspect-video">
-              <img src="/assets/images/tierra-viva.webp" alt="Tierra Viva"
+              <img src="/assets/images/cases/4.%20zavod.webp" alt="ZAVOD COFFEE"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
             <div className="mt-4">
-              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">Tierra Viva</h3>
-              <p className="text-muted text-[14px] mt-1">Visual Identity, Brand Strategy</p>
+              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">ZAVOD COFFEE</h3>
+              <p className="text-muted text-[14px] mt-1">Обжарщик кофе</p>
             </div>
           </a>
 
-          <a href="../cases/casa-nomad/index.html" className="case-card group block relative" data-case-card
-            data-tags="art-direction,digital" data-reveal-up>
+          <a href="../cases/play-cafe/index.html" className="case-card group block relative" data-case-card data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
-              <img src="/assets/images/casa-nomad.webp" alt="Casa Nomad"
+              <img src="/assets/images/cases/5.%20play-cafe.webp" alt="ДЕТСТВО Play Café"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
             </div>
             <div className="mt-4">
-              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">Casa Nomad</h3>
-              <p className="text-muted text-[14px] mt-1">Art Direction, Digital</p>
+              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">ДЕТСТВО Play Café</h3>
+              <p className="text-muted text-[14px] mt-1">Семейное кафе с детским театром</p>
             </div>
           </a>
-
-          <a href="../cases/alba/index.html" className="case-card group block relative" data-case-card
-            data-tags="brand-strategy,visual-identity" data-reveal-up>
-            <div className="overflow-hidden aspect-[4/5]">
-              <img src="/assets/images/alba.webp" alt="Alba"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                loading="lazy" />
-            </div>
-            <div className="mt-4">
-              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">Alba</h3>
-              <p className="text-muted text-[14px] mt-1">Brand Strategy, Visual Identity</p>
-            </div>
-          </a>
-
-          <a href="../cases/luz-de-tierra/index.html" className="case-card group block relative" data-case-card
-            data-tags="packaging,brand-strategy" data-reveal-up>
-            <div className="overflow-hidden aspect-[4/5]">
-              <img src="/assets/images/tierra-viva.webp" alt="Luz de Tierra"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                loading="lazy" />
-            </div>
-            <div className="mt-4">
-              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">Luz de Tierra</h3>
-              <p className="text-muted text-[14px] mt-1">Packaging, Brand Strategy</p>
-            </div>
-          </a>
-
-          <a href="../cases/la-mesa/index.html" className="case-card group block relative" data-case-card
-            data-tags="marketing-materials,packaging" data-reveal-up>
-            <div className="overflow-hidden aspect-[4/5]">
-              <img src="/assets/images/casa-nomad.webp" alt="La Mesa"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                loading="lazy" />
-            </div>
-            <div className="mt-4">
-              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">La Mesa</h3>
-              <p className="text-muted text-[14px] mt-1">Marketing Materials, Packaging</p>
-            </div>
-          </a>
-
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
 
     {/* FOOTER */}
     

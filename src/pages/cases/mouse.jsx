@@ -2,16 +2,16 @@ import Layout from "../../components/Layout";
 
 export default function Page() {
   return (
-    <Layout title="FUTURIST" pageName="case-futurist">
+    <Layout title="Mouse House" pageName="case-mouse">
       
         <section className="min-h-screen pt-28 pb-12 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <h1 className="text-[32px] md:text-[40px] lg:text-[48px] font-medium tracking-tighter-custom uppercase mb-2"
-          data-split-text>FUTURIST</h1>
-        <p className="text-[16px] font-medium tracking-tight-custom text-muted mb-12" data-reveal-up>Авторский ресторан</p>
+          data-split-text>Mouse House</h1>
+        <p className="text-[16px] font-medium tracking-tight-custom text-muted mb-12" data-reveal-up>Семейный ресторан и клуб</p>
 
         <div className="overflow-hidden aspect-[4/3]" data-reveal-up>
-          <img src="/assets/images/cases/1.%20futurist.webp" alt="FUTURIST"
+          <img src="/assets/images/cases/3.%20mouse.webp" alt="Mouse House"
             className="w-full h-full object-cover case-hero-parallax" />
         </div>
 
@@ -28,7 +28,7 @@ export default function Page() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-[15px] font-normal tracking-tight-custom uppercase text-muted mb-2">Client</p>
-                <p className="text-[16px] font-medium tracking-tight-custom">FUTURIST</p>
+                <p className="text-[16px] font-medium tracking-tight-custom">Mouse House</p>
               </div>
               <div>
                 <p className="text-[15px] font-normal tracking-tight-custom uppercase text-muted mb-2">Location</p>
@@ -67,6 +67,17 @@ export default function Page() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-[26px]">
 
+          <a href="../futurist/index.html" className="case-card group block relative" data-case-card data-reveal-up>
+            <div className="overflow-hidden aspect-[4/5]">
+              <img src="/assets/images/cases/1.%20futurist.webp" alt="FUTURIST"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                loading="lazy" />
+            </div>
+            <div className="mt-4">
+              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">FUTURIST</h3>
+              <p className="text-muted text-[14px] mt-1">Авторский ресторан</p>
+            </div>
+          </a>
           <a href="../maison/index.html" className="case-card group block relative" data-case-card data-reveal-up>
             <div className="overflow-hidden aspect-[4/5]">
               <img src="/assets/images/cases/2.%20maison.webp" alt="MAISON ROUGE"
@@ -76,17 +87,6 @@ export default function Page() {
             <div className="mt-4">
               <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">MAISON ROUGE</h3>
               <p className="text-muted text-[14px] mt-1">Премиальный рестоклуб</p>
-            </div>
-          </a>
-          <a href="../mouse/index.html" className="case-card group block relative" data-case-card data-reveal-up>
-            <div className="overflow-hidden aspect-[4/5]">
-              <img src="/assets/images/cases/3.%20mouse.webp" alt="Mouse House"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                loading="lazy" />
-            </div>
-            <div className="mt-4">
-              <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">Mouse House</h3>
-              <p className="text-muted text-[14px] mt-1">Семейный ресторан и клуб</p>
             </div>
           </a>
           <a href="../zavod/index.html" className="case-card group block relative" data-case-card data-reveal-up>
