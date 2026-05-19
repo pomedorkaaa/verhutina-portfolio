@@ -10,7 +10,7 @@ export default function Page() {
           data-split-text>Mouse House</h1>
         <p className="text-[16px] font-medium tracking-tight-custom text-muted mb-12" data-reveal-up>Семейный ресторан и клуб</p>
 
-        <div className="overflow-hidden aspect-[4/3]" data-reveal-up>
+        <div className="overflow-hidden" data-reveal-up>
           <img src="/assets/images/cases/3.%20mouse.webp" alt="Mouse House"
             className="w-full h-full object-cover case-hero-parallax" />
         </div>
@@ -60,15 +60,15 @@ export default function Page() {
         <div className="flex items-end justify-between mb-12">
           <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-medium tracking-tighter-custom uppercase"
             data-reveal-up>More projects</h2>
-          <a href="../../works/index.html"
+          <a href="/works"
             className="text-[15px] font-normal tracking-tight-custom uppercase text-primary border-b border-primary/30 pb-1 hover:border-primary transition-colors"
             data-reveal-up>See all works</a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-[26px]">
 
-          <a href="../futurist/index.html" className="case-card group block relative" data-case-card data-reveal-up>
-            <div className="overflow-hidden aspect-[4/5]">
+          <a href="/cases/futurist" className="case-card group block relative" data-case-card data-reveal-up>
+            <div className="overflow-hidden">
               <img src="/assets/images/cases/1.%20futurist.webp" alt="FUTURIST"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
@@ -78,8 +78,8 @@ export default function Page() {
               <p className="text-muted text-[14px] mt-1">Авторский ресторан</p>
             </div>
           </a>
-          <a href="../maison/index.html" className="case-card group block relative" data-case-card data-reveal-up>
-            <div className="overflow-hidden aspect-[4/5]">
+          <a href="/cases/maison" className="case-card group block relative" data-case-card data-reveal-up>
+            <div className="overflow-hidden">
               <img src="/assets/images/cases/2.%20maison.webp" alt="MAISON ROUGE"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />
@@ -89,8 +89,8 @@ export default function Page() {
               <p className="text-muted text-[14px] mt-1">Премиальный рестоклуб</p>
             </div>
           </a>
-          <a href="../zavod/index.html" className="case-card group block relative" data-case-card data-reveal-up>
-            <div className="overflow-hidden aspect-video">
+          <a href="/cases/zavod" className="case-card group block relative" data-case-card data-reveal-up>
+            <div className="overflow-hidden">
               <img src="/assets/images/cases/4.%20zavod.webp" alt="ZAVOD COFFEE"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy" />

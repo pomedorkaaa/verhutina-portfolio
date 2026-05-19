@@ -83,7 +83,7 @@ export default function Page() {
           <div className="flex items-end justify-between mb-12">
             <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-medium tracking-tighter-custom uppercase"
               data-reveal-up>КЕЙСЫ</h2>
-            <a href="pages/works/index.html"
+            <a href="/works"
               className="text-[15px] font-normal tracking-tight-custom uppercase text-primary border-b border-primary/30 pb-1 hover:border-primary transition-colors backdrop-blur-sm"
               data-reveal-up>
               ВСЕ КЕЙСЫ
@@ -92,7 +92,7 @@ export default function Page() {
 
           <div className="cases-grid grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-[26px]" id="cases-grid">
 
-            <a href="pages/cases/futurist/index.html" className="case-card group block relative" data-case-card data-reveal-up>
+            <a href="/cases/futurist" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
                 <img src="/assets/images/cases/1.%20futurist.webp" alt="FUTURIST"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -104,7 +104,7 @@ export default function Page() {
               </div>
             </a>
 
-            <a href="pages/cases/maison/index.html" className="case-card group block relative" data-case-card data-reveal-up>
+            <a href="/cases/maison" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
                 <img src="/assets/images/cases/2.%20maison.webp" alt="MAISON ROUGE"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -116,7 +116,7 @@ export default function Page() {
               </div>
             </a>
 
-            <a href="pages/cases/mouse/index.html" className="case-card group block relative" data-case-card data-reveal-up>
+            <a href="/cases/mouse" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
                 <img src="/assets/images/cases/3.%20mouse.webp" alt="Mouse House"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -128,7 +128,7 @@ export default function Page() {
               </div>
             </a>
 
-            <a href="pages/cases/zavod/index.html" className="case-card group block relative" data-case-card data-reveal-up>
+            <a href="/cases/zavod" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
                 <img src="/assets/images/cases/4.%20zavod.webp" alt="ZAVOD COFFEE"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -140,7 +140,7 @@ export default function Page() {
               </div>
             </a>
 
-            <a href="pages/cases/play-cafe/index.html" className="case-card group block relative" data-case-card data-reveal-up>
+            <a href="/cases/play-cafe" className="case-card group block relative" data-case-card data-reveal-up>
               <div className="overflow-hidden">
                 <img src="/assets/images/cases/5.%20play-cafe.webp" alt="ДЕТСТВО Play Café"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
