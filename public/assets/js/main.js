@@ -5,6 +5,11 @@
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Отключаем автоматическое восстановление скролла браузером
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
   gsap.registerPlugin(ScrollTrigger);
 
   // Инициализация Lenis (Smooth Scroll)
@@ -119,8 +124,11 @@ function initPageEnter(isFromTransition, container = document) {
     if (words.length === 0) return;
 
     // Во временном контейнере анимируем все текстовые элементы над сгибом
-    // Если это временный контейнер, считаем, что все элементы на первом экране видны
-    const isAboveFold = container !== document || el.getBoundingClientRect().top < window.innerHeight;
+    // Если это временный контейнер, проверяем позицию относительно его верха (offsetTop)
+    // Если основной документ — через getBoundingClientRect().top
+    const isAboveFold = container !== document 
+      ? el.offsetTop < window.innerHeight 
+      : el.getBoundingClientRect().top < window.innerHeight;
 
     if (isAboveFold) {
       // Помечаем элемент как уже запустивший анимацию
@@ -141,7 +149,10 @@ function initPageEnter(isFromTransition, container = document) {
   // Reveal-анимации для элементов на первом экране (data-reveal-up)
   const heroReveals = [];
   container.querySelectorAll('[data-reveal-up]').forEach(el => {
-    const isAboveFold = container !== document || el.getBoundingClientRect().top < window.innerHeight;
+    const isAboveFold = container !== document 
+      ? el.offsetTop < window.innerHeight 
+      : el.getBoundingClientRect().top < window.innerHeight;
+      
     if (isAboveFold) {
       heroReveals.push(el);
     }
@@ -318,7 +329,16 @@ async function loadPage(href, pushState = true) {
     // 4. Настраиваем GSAP-таймлайн для перехода
     const tl = gsap.timeline({
       onComplete: () => {
-        // Переносим уже подготовленный контент (с split-text обёртками) из временного контейнера
+        // Мгновенно скроллим основное окно наверх, пока оно скрыто наезжающей страницей
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { immediate: true });
+        }
+        window.scrollTo(0, 0);
+
+        // Очищаем память скролла ScrollTrigger, чтобы он не пытался восстановить позиции
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.clearScrollMemory();
+        }
         if (oldContent) {
           // Фиксируем высоту, чтобы избежать мгновенного исчезновения скроллбара и прыжка контента
           const currentHeight = oldContent.offsetHeight;
@@ -349,9 +369,6 @@ async function loadPage(href, pushState = true) {
           document.body.insertBefore(finalNavbar, oldContent);
         }
 
-        // Удаляем временный контейнер
-        transitionContainer.remove();
-
         // Обновляем метаданные и заголовок
         document.title = doc.title;
         if (doc.body.dataset.page) {
@@ -368,21 +385,24 @@ async function loadPage(href, pushState = true) {
         // Подсвечиваем активные элементы меню
         updateActiveHeaderLinks(window.location.pathname);
 
-        // Ре-инициализируем все JS скрипты
-        reinitScripts();
+        // Ре-инициализируем все JS скрипты через requestAnimationFrame,
+        // чтобы дать браузеру один кадр на отрисовку нового DOM-дерева
+        requestAnimationFrame(() => {
+          reinitScripts();
 
-        // Убираем класс перехода и добавляем готовность
-        document.documentElement.classList.remove('is-transitioning');
-        document.documentElement.classList.add('page-ready');
+          // Удаляем временный контейнер только после того, как основной контент готов и анимирован
+          transitionContainer.remove();
 
-        // Скроллим наверх
-        if (window.lenis) {
-          window.lenis.scrollTo(0, { immediate: true });
-          window.lenis.resize();
-          window.lenis.start(); // Возобновляем скроллинг
-        } else {
-          window.scrollTo(0, 0);
-        }
+          // Убираем класс перехода и добавляем готовность
+          document.documentElement.classList.remove('is-transitioning');
+          document.documentElement.classList.add('page-ready');
+
+          // Возобновляем скроллинг
+          if (window.lenis) {
+            window.lenis.resize();
+            window.lenis.start();
+          }
+        });
       }
     });
 
@@ -448,16 +468,16 @@ function updateActiveHeaderLinks(pathname) {
 }
 
 function reinitScripts() {
-  // Убиваем оставшиеся ScrollTrigger инстансы (основная очистка уже произошла в loadPage)
+  // Убиваем оставшиеся ScrollTrigger инстансы
   ScrollTrigger.getAll().forEach(t => t.kill());
 
   // Заново привязываем листенеры и триггеры
   initNavbar();
-  initMobileMenu(); // Перенавешиваем события кликов бургер-меню для нового хедера
+  initMobileMenu(); 
   initFilters();
   initParallax();
 
-  // Запускаем scroll-reveal для элементов ниже fold (так как первый экран уже раскрыт во временном контейнере)
+  // Запускаем scroll-reveal для элементов ниже fold
   initScrollReveals();
 
   // Инициализация скриптов главной страницы
@@ -470,6 +490,8 @@ function reinitScripts() {
   if (window.lenis) {
     window.lenis.resize();
   }
+  
+  // Принудительное обновление всех триггеров после реинициализации
   ScrollTrigger.refresh();
 }
 
@@ -601,6 +623,8 @@ function initMobileMenu() {
 function initParallax() {
   const aboutPhoto = document.querySelector('.photo-parallax');
   if (aboutPhoto) {
+    // Для фото в секции "Обо мне" оставляем старт при появлении снизу
+    gsap.set(aboutPhoto, { y: '-8%' });
     gsap.fromTo(aboutPhoto,
       { y: '-8%' },
       {
@@ -618,16 +642,19 @@ function initParallax() {
 
   const caseHero = document.querySelector('.case-hero-parallax');
   if (caseHero) {
+    // ВАЖНО: Для героя кейса ставим y: 0 в начале, чтобы не было прыжка после перехода.
+    // Параллакс начнется, когда пользователь начнет скроллить вниз от 0.
+    gsap.set(caseHero, { y: '0%' });
     gsap.fromTo(caseHero,
-      { y: '-10%' },
+      { y: '0%' },
       {
-        y: '10%',
+        y: '15%',
         ease: 'none',
         scrollTrigger: {
           trigger: caseHero.closest('section'),
-          start: 'top bottom',
+          start: 'top top', // Начинаем от самого верха
           end: 'bottom top',
-          scrub: 2,
+          scrub: 1.5,
         },
       }
     );
