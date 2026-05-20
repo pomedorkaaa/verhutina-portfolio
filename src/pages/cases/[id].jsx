@@ -40,6 +40,12 @@ export async function getStaticData() {
 export default function Page({ currentCase, allCases }) {
   const hasStats = currentCase.stats && currentCase.stats.length > 0;
   
+  // Функция для очистки текста от лишних пробелов в начале строк (trim для каждой строки)
+  const formatText = (text) => {
+    if (!text) return "";
+    return text.split('\n').map(line => line.trim()).join('\n');
+  };
+
   // Вычисляем блок "More projects": первые 3 проекта, отличные от текущего
   const moreProjects = allCases
     .filter((c) => c.slug !== currentCase.slug)
@@ -82,7 +88,7 @@ export default function Page({ currentCase, allCases }) {
                   Задача
                 </h3>
                 <p className="text-[16px] font-medium tracking-tight-custom text-muted leading-[1.4] whitespace-pre-wrap">
-                  {currentCase.task}
+                  {formatText(currentCase.task)}
                 </p>
               </div>
               <div>
@@ -90,7 +96,7 @@ export default function Page({ currentCase, allCases }) {
                   Роль
                 </h3>
                 <p className="text-[16px] font-medium tracking-tight-custom text-muted leading-[1.4] whitespace-pre-wrap">
-                  {currentCase.role}
+                  {formatText(currentCase.role)}
                 </p>
               </div>
               <div>
@@ -98,7 +104,7 @@ export default function Page({ currentCase, allCases }) {
                   Результат
                 </h3>
                 <p className="text-[16px] font-medium tracking-tight-custom text-muted leading-[1.4] whitespace-pre-wrap">
-                  {currentCase.result}
+                  {formatText(currentCase.result)}
                 </p>
                 {currentCase.disclaimer && (
                   <p className="text-[13px] font-normal tracking-tight-custom text-muted/40 mt-8">
