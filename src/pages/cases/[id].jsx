@@ -40,10 +40,34 @@ export async function getStaticData() {
 export default function Page({ currentCase, allCases }) {
   const hasStats = currentCase.stats && currentCase.stats.length > 0;
   
-  // Функция для очистки текста от лишних пробелов в начале строк (trim для каждой строки)
-  const formatText = (text) => {
-    if (!text) return "";
-    return text.split('\n').map(line => line.trim()).join('\n');
+  // Функция для интеллектуального рендеринга текста
+  const renderFormattedText = (text) => {
+    if (!text) return null;
+    
+    // Разбиваем на строки и очищаем каждую от лишних пробелов по краям
+    const lines = text.split('\n').map(line => line.trim()).filter(line => line !== "");
+    
+    return (
+      <div className="space-y-4">
+        {lines.map((line, idx) => {
+          // Если строка начинается с дефиса или другого маркера списка
+          if (line.startsWith('-') || line.startsWith('•')) {
+            return (
+              <div key={idx} className="flex gap-2 text-[16px] font-medium tracking-tight-custom text-muted leading-[1.4]">
+                <span className="flex-shrink-0">—</span>
+                <span>{line.startsWith('-') || line.startsWith('•') ? line.substring(1).trim() : line}</span>
+              </div>
+            );
+          }
+          // Обычный абзац
+          return (
+            <p key={idx} className="text-[16px] font-medium tracking-tight-custom text-muted leading-[1.4]">
+              {line}
+            </p>
+          );
+        })}
+      </div>
+    );
   };
 
   // Вычисляем блок "More projects": первые 3 проекта, отличные от текущего
@@ -87,25 +111,19 @@ export default function Page({ currentCase, allCases }) {
                 <h3 className="text-[20px] md:text-[24px] font-medium tracking-tight-custom mb-4 text-primary">
                   Задача
                 </h3>
-                <p className="text-[16px] font-medium tracking-tight-custom text-muted leading-[1.4] whitespace-pre-wrap">
-                  {formatText(currentCase.task)}
-                </p>
+                {renderFormattedText(currentCase.task)}
               </div>
               <div>
                 <h3 className="text-[20px] md:text-[24px] font-medium tracking-tight-custom mb-4 text-primary">
                   Роль
                 </h3>
-                <p className="text-[16px] font-medium tracking-tight-custom text-muted leading-[1.4] whitespace-pre-wrap">
-                  {formatText(currentCase.role)}
-                </p>
+                {renderFormattedText(currentCase.role)}
               </div>
               <div>
                 <h3 className="text-[20px] md:text-[24px] font-medium tracking-tight-custom mb-4 text-primary">
                   Результат
                 </h3>
-                <p className="text-[16px] font-medium tracking-tight-custom text-muted leading-[1.4] whitespace-pre-wrap">
-                  {formatText(currentCase.result)}
-                </p>
+                {renderFormattedText(currentCase.result)}
                 {currentCase.disclaimer && (
                   <p className="text-[13px] font-normal tracking-tight-custom text-muted/40 mt-8">
                     {currentCase.disclaimer}
