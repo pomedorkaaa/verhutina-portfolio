@@ -7,6 +7,30 @@
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
+  // Инициализация Lenis (Smooth Scroll)
+  if (typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo out
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.5,
+      infinite: false,
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    window.lenis = lenis;
+  }
+
   const isFromTransition = document.documentElement.classList.contains('page-entering');
 
   // Инициализируем функционал
@@ -33,92 +57,115 @@ document.addEventListener('DOMContentLoaded', () => {
    АНИМАЦИЯ ВХОДА НА СТРАНИЦУ
    ============================================================ */
 
-function initPageEnter(isFromTransition) {
-  const pageContent = document.getElementById('page-content');
+function initPageEnter(isFromTransition, container = document) {
+  // Для поиска page-content проверяем, есть ли метод querySelector у переданного контейнера
+  const pageContent = container.getElementById ? container.getElementById('page-content') : container.querySelector('#page-content');
   const navbar = document.getElementById('navbar');
 
-  if (!pageContent) return;
+  if (!pageContent && container === document) return;
 
-  // Подготовка: разбиваем тексты на слова
-  splitAllTexts();
+  // Подготовка: разбиваем тексты на слова в рамках контейнера
+  splitAllTexts(container);
 
   const tl = gsap.timeline({
     onComplete: () => {
-      document.documentElement.classList.add('page-ready');
-      document.documentElement.classList.remove('page-entering');
-      // Запускаем scroll-reveal для элементов ниже fold
-      initScrollReveals();
+      if (container === document) {
+        document.documentElement.classList.add('page-ready');
+        document.documentElement.classList.remove('page-entering');
+        
+        // Запускаем scroll-reveal для элементов ниже fold
+        initScrollReveals();
+      }
     }
   });
 
-  // Навбар появляется первым
-  tl.fromTo(navbar,
-    { opacity: 0, y: -20 },
-    { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-    0
-  );
+  if (isFromTransition && container !== document) {
+    // Если анимируем элементы внутри временного контейнера наезда,
+    // сам контейнер pageContent не анимируем здесь (он анимируется в loadPage)
+    // Но мы сбрасываем его начальные стили для готовности
+    gsap.set(pageContent, { opacity: 1, scale: 1, y: 0 });
+  } else if (isFromTransition) {
+    if (pageContent) gsap.set(pageContent, { opacity: 1, scale: 1, y: 0 });
+  } else {
+    // Обычная загрузка (первый визит) — просто плавный вход контента
+    if (pageContent) {
+      tl.fromTo(pageContent,
+        { opacity: 0, y: 40, scale: 0.99 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power3.out'
+        },
+        0.1
+      );
+    }
+  }
 
-  // Основной контент — deblur + scale + fade in
-  tl.fromTo(pageContent,
-    { opacity: 0, scale: 1.02, filter: 'blur(8px)' },
-    {
-      opacity: 1,
-      scale: 1,
-      filter: 'blur(0px)',
-      duration: 0.8,
-      ease: 'power3.out',
-    },
-    isFromTransition ? 0.05 : 0.1
-  );
+  // Навбар плавно появляется сверху
+  if (navbar && container === document) {
+    tl.fromTo(navbar,
+      { opacity: 0, y: -20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+      isFromTransition ? 0.15 : 0
+    );
+  }
 
   // Текстовые split-анимации (пословные) для элементов в зоне видимости
-  const splitElements = document.querySelectorAll('[data-split-text]');
-  splitElements.forEach((el, i) => {
+  const splitElements = container.querySelectorAll('[data-split-text]');
+  splitElements.forEach((el) => {
     const words = el.querySelectorAll('.word');
     if (words.length === 0) return;
 
-    // Проверяем, видим ли элемент в верхней части экрана (hero/первый экран)
-    const rect = el.getBoundingClientRect();
-    const isAboveFold = rect.top < window.innerHeight;
+    // Во временном контейнере анимируем все текстовые элементы над сгибом
+    // Если это временный контейнер, считаем, что все элементы на первом экране видны
+    const isAboveFold = container !== document || el.getBoundingClientRect().top < window.innerHeight;
 
     if (isAboveFold) {
+      // Помечаем элемент как уже запустивший анимацию
+      el.dataset.splitAnimated = 'true';
       tl.fromTo(words,
         { y: '110%' },
         {
           y: '0%',
-          duration: 0.7,
+          duration: 0.85,
           stagger: 0.04,
-          ease: 'power3.out',
+          ease: 'power4.out',
         },
-        isFromTransition ? 0.3 : 0.4
+        isFromTransition ? 0.15 : 0.3
       );
     }
   });
 
   // Reveal-анимации для элементов на первом экране (data-reveal-up)
   const heroReveals = [];
-  document.querySelectorAll('[data-reveal-up]').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight) {
+  container.querySelectorAll('[data-reveal-up]').forEach(el => {
+    const isAboveFold = container !== document || el.getBoundingClientRect().top < window.innerHeight;
+    if (isAboveFold) {
       heroReveals.push(el);
     }
   });
 
   if (heroReveals.length) {
+    // Сразу помечаем их как анимированные, чтобы предотвратить повторный запуск в initScrollReveals
+    heroReveals.forEach(el => {
+      el.dataset.revealAnimated = 'true';
+    });
     tl.fromTo(heroReveals,
       { y: 30, opacity: 0, filter: 'blur(4px)' },
       {
         y: 0,
         opacity: 1,
         filter: 'blur(0px)',
-        duration: 0.7,
+        duration: 0.85,
         stagger: 0.06,
-        ease: 'power3.out',
+        ease: 'power4.out',
         onComplete: function () {
           heroReveals.forEach(el => el.classList.add('revealed'));
         }
       },
-      isFromTransition ? 0.25 : 0.35
+      isFromTransition ? 0.15 : 0.25
     );
   }
 }
@@ -128,8 +175,8 @@ function initPageEnter(isFromTransition) {
    SPLIT TEXT — РАЗБИВКА ТЕКСТА НА СЛОВА
    ============================================================ */
 
-function splitAllTexts() {
-  document.querySelectorAll('[data-split-text]').forEach(el => {
+function splitAllTexts(container = document) {
+  container.querySelectorAll('[data-split-text]').forEach(el => {
     if (el.dataset.splitDone) return;
 
     const text = el.textContent.trim();
@@ -148,21 +195,22 @@ function splitAllTexts() {
 
       wrapper.appendChild(inner);
       el.appendChild(wrapper);
-
-      // Добавляем пробел после каждого слова, кроме последнего
-      if (i < words.length - 1) {
-        el.appendChild(document.createTextNode(' '));
-      }
+      // Пробелы между словами реализуются через CSS margin-right у .word-wrapper
     });
   });
 }
 
 
 /* ============================================================
-   АНИМАЦИЯ ПЕРЕХОДОВ МЕЖДУ СТРАНИЦАМИ (Exit)
+   АНИМАЦИЯ ПЕРЕХОДОВ МЕЖДУ СТРАНИЦАМИ (AJAX-наезжание в стиле Framer)
    ============================================================ */
 
 function initPageTransitions() {
+  // Обработка перехода по истории браузера (кнопки Назад/Вперед)
+  window.addEventListener('popstate', () => {
+    loadPage(window.location.pathname, false);
+  });
+
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (!link) return;
@@ -185,41 +233,244 @@ function initPageTransitions() {
 
     // Предотвращаем двойной клик
     if (document.documentElement.classList.contains('is-transitioning')) return;
-    document.documentElement.classList.add('is-transitioning');
 
-    const pageContent = document.getElementById('page-content');
-    const navbar = document.getElementById('navbar');
+    // Загружаем страницу через AJAX
+    loadPage(href, true);
+  });
+}
 
-    // Помечаем, что идёт переход
-    sessionStorage.setItem('page-transitioning', 'true');
+async function loadPage(href, pushState = true) {
+  document.documentElement.classList.add('is-transitioning');
+  document.documentElement.classList.remove('page-ready');
 
-    const exitTl = gsap.timeline({
+  // Останавливаем плавный скроллинг во время перехода
+  if (window.lenis) {
+    window.lenis.stop();
+  }
+
+  // Убиваем все активные GSAP-анимации на элементах, которые участвуют в переходе,
+  // чтобы незавершённые tweens от initPageEnter не блокировали таймлайн наезда
+  const oldPageContent = document.getElementById('page-content');
+  const oldNavbarEl = document.getElementById('navbar');
+  if (oldPageContent) gsap.killTweensOf(oldPageContent);
+  if (oldNavbarEl) gsap.killTweensOf(oldNavbarEl);
+  // Убиваем все анимации на элементах внутри page-content (split-text слова, reveal-up и т.д.)
+  document.querySelectorAll('#page-content *').forEach(el => gsap.killTweensOf(el));
+  ScrollTrigger.getAll().forEach(t => t.kill());
+
+  try {
+    // 1. Асинхронно запрашиваем новую страницу
+    const response = await fetch(href);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const html = await response.text();
+
+    // Очищаем HTML от тегов link и script, чтобы избежать повторного запроса/проверки шрифтов и стилей в браузере при парсинге
+    const cleanHtml = html
+      .replace(/<link\b[^>]*>/gi, '')
+      .replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gi, '');
+
+    // 2. Парсим полученный HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(cleanHtml, 'text/html');
+
+    const newContent = doc.getElementById('page-content');
+    if (!newContent) {
+      // Если на странице нет #page-content, делаем обычный переход
+      window.location.href = href;
+      return;
+    }
+
+    const oldContent = document.getElementById('page-content');
+    const oldNavbar = document.getElementById('navbar');
+    const newNavbar = doc.getElementById('navbar');
+
+    // Переименовываем старый навбар перед анимацией наезда, чтобы к новому навбару во временном контейнере
+    // применились все стили #navbar
+    if (oldNavbar) {
+      oldNavbar.id = 'navbar-old';
+    }
+
+    // 3. Создаем временный контейнер для наезжания новой страницы
+    const transitionContainer = document.createElement('div');
+    transitionContainer.className = 'page-transition-container';
+
+    // Внедряем новый хедер во временный контейнер, чтобы он наезжал вместе со страницей
+    if (newNavbar) {
+      const navbarClone = newNavbar.cloneNode(true);
+      // Принудительно делаем клон видимым (в CSS #navbar начинает с opacity: 0)
+      navbarClone.style.opacity = '1';
+      navbarClone.style.transform = 'translateY(0)';
+      transitionContainer.appendChild(navbarClone);
+    }
+
+    // Внедряем контент новой страницы во временный контейнер под ID page-content, 
+    // чтобы его элементы без проблем искались в initPageEnter
+    const pageContentWrapper = document.createElement('div');
+    pageContentWrapper.id = 'page-content';
+    pageContentWrapper.innerHTML = newContent.innerHTML;
+    transitionContainer.appendChild(pageContentWrapper);
+
+    document.body.appendChild(transitionContainer);
+
+    // Запускаем анимацию появления внутренних элементов НОВОЙ страницы во временном контейнере
+    initPageEnter(true, transitionContainer);
+
+    // 4. Настраиваем GSAP-таймлайн для перехода
+    const tl = gsap.timeline({
       onComplete: () => {
-        window.location.href = href;
+        // Переносим уже подготовленный контент (с split-text обёртками) из временного контейнера
+        if (oldContent) {
+          // Фиксируем высоту, чтобы избежать мгновенного исчезновения скроллбара и прыжка контента
+          const currentHeight = oldContent.offsetHeight;
+          oldContent.style.height = `${currentHeight}px`;
+
+          // Берём контент из pageContentWrapper — он уже прошёл splitAllTexts и анимации
+          oldContent.innerHTML = '';
+          while (pageContentWrapper.firstChild) {
+            oldContent.appendChild(pageContentWrapper.firstChild);
+          }
+          
+          // Сбрасываем стили старого контента
+          oldContent.style.height = '';
+          gsap.set(oldContent, { opacity: 1, scale: 1, y: 0 });
+        }
+
+        // Заменяем старый навбар на новый на его постоянное место
+        const currentOldNavbar = document.getElementById('navbar-old');
+        const finalNavbar = newNavbar ? newNavbar.cloneNode(true) : null;
+        if (finalNavbar) {
+          // Принудительно устанавливаем видимость нового навбара
+          finalNavbar.style.opacity = '1';
+          finalNavbar.style.transform = 'translateY(0)';
+        }
+        if (currentOldNavbar && finalNavbar) {
+          currentOldNavbar.replaceWith(finalNavbar);
+        } else if (finalNavbar) {
+          document.body.insertBefore(finalNavbar, oldContent);
+        }
+
+        // Удаляем временный контейнер
+        transitionContainer.remove();
+
+        // Обновляем метаданные и заголовок
+        document.title = doc.title;
+        if (doc.body.dataset.page) {
+          document.body.dataset.page = doc.body.dataset.page;
+        } else {
+          delete document.body.dataset.page;
+        }
+
+        // Обновляем URL в строке адреса
+        if (pushState) {
+          history.pushState(null, '', href);
+        }
+
+        // Подсвечиваем активные элементы меню
+        updateActiveHeaderLinks(window.location.pathname);
+
+        // Ре-инициализируем все JS скрипты
+        reinitScripts();
+
+        // Убираем класс перехода и добавляем готовность
+        document.documentElement.classList.remove('is-transitioning');
+        document.documentElement.classList.add('page-ready');
+
+        // Скроллим наверх
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { immediate: true });
+          window.lenis.resize();
+          window.lenis.start(); // Возобновляем скроллинг
+        } else {
+          window.scrollTo(0, 0);
+        }
       }
     });
 
-    // Контент уходит — blur, scale down, fade
-    if (pageContent) {
-      exitTl.to(pageContent, {
-        opacity: 0,
-        scale: 0.97,
-        filter: 'blur(8px)',
-        duration: 0.6,
-        ease: 'power3.inOut',
-      }, 0);
+    // Анимация: временный контейнер наезжает снизу вверх
+    tl.fromTo(transitionContainer,
+      { y: '100vh' },
+      { y: '0vh', duration: 1.1, ease: 'power4.inOut' },
+      0
+    );
+
+    // Старый контент плавно уходит вверх, уменьшается и блекнет под новой страницей
+    if (oldContent) {
+      tl.fromTo(oldContent,
+        { scale: 1, opacity: 1, y: 0 },
+        { scale: 0.95, opacity: 0.2, y: -50, duration: 1.1, ease: 'power4.inOut' },
+        0
+      );
     }
 
-    // Навбар плавно исчезает
-    if (navbar) {
-      exitTl.to(navbar, {
-        opacity: 0,
-        y: -15,
-        duration: 0.4,
-        ease: 'power3.inOut',
-      }, 0);
+    // Старый навбар плавно затухает, уступая место новому наезжающему навбару
+    if (oldNavbar) {
+      tl.fromTo(oldNavbar,
+        { opacity: 1 },
+        { opacity: 0, duration: 0.4, ease: 'power2.inOut' },
+        0
+      );
+    }
+
+  } catch (error) {
+    console.error('Ошибка перехода страницы:', error);
+    // Восстанавливаем ID старого навбара в случае ошибки
+    const currentOldNavbar = document.getElementById('navbar-old');
+    if (currentOldNavbar) {
+      currentOldNavbar.id = 'navbar';
+    }
+    // В случае ошибки с переходом, просто загружаем страницу стандартно
+    window.location.href = href;
+  }
+}
+
+function updateActiveHeaderLinks(pathname) {
+  // Обрабатываем только nav-link элементы, исключая лого (nav-logo)
+  const navLinks = document.querySelectorAll('#navbar .nav-link, #mobile-menu a');
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+    
+    let isActive = false;
+    if (href === '/') {
+      isActive = pathname === '/' || pathname === '/index.html';
+    } else {
+      isActive = pathname.startsWith(href);
+    }
+    
+    if (isActive) {
+      link.classList.remove('text-primary/50', 'hover:text-primary', 'hover:text-primary/70');
+      link.classList.add('text-primary');
+    } else {
+      link.classList.remove('text-primary');
+      link.classList.add('text-primary/50', 'hover:text-primary');
     }
   });
+}
+
+function reinitScripts() {
+  // Убиваем оставшиеся ScrollTrigger инстансы (основная очистка уже произошла в loadPage)
+  ScrollTrigger.getAll().forEach(t => t.kill());
+
+  // Заново привязываем листенеры и триггеры
+  initNavbar();
+  initMobileMenu(); // Перенавешиваем события кликов бургер-меню для нового хедера
+  initFilters();
+  initParallax();
+
+  // Запускаем scroll-reveal для элементов ниже fold (так как первый экран уже раскрыт во временном контейнере)
+  initScrollReveals();
+
+  // Инициализация скриптов главной страницы
+  if (document.body.dataset.page === 'home') {
+    initCursorTrail();
+    initHeroScrollBlur();
+  }
+
+  // Обновляем размеры Lenis и ScrollTrigger под новую страницу
+  if (window.lenis) {
+    window.lenis.resize();
+  }
+  ScrollTrigger.refresh();
 }
 
 
@@ -228,17 +479,19 @@ function initPageTransitions() {
    ============================================================ */
 
 function initScrollReveals() {
-  const revealElements = document.querySelectorAll('[data-reveal-up]:not(.revealed)');
+  const revealElements = document.querySelectorAll('[data-reveal-up]:not(.revealed):not([data-reveal-animated])');
 
   revealElements.forEach(el => {
+    // Помечаем, чтобы не анимировать повторно
+    el.dataset.revealAnimated = 'true';
     gsap.fromTo(el,
       { y: 30, opacity: 0, filter: 'blur(4px)' },
       {
         y: 0,
         opacity: 1,
         filter: 'blur(0px)',
-        duration: 0.7,
-        ease: 'power3.out',
+        duration: 0.85,
+        ease: 'power4.out',
         scrollTrigger: {
           trigger: el,
           start: 'top 90%',
@@ -253,32 +506,29 @@ function initScrollReveals() {
 
   // Split-text элементы ниже fold — анимируются по scroll
   document.querySelectorAll('[data-split-text]').forEach(el => {
+    // Пропускаем уже проанимированные элементы
+    if (el.dataset.splitAnimated) return;
+
     const words = el.querySelectorAll('.word');
     if (words.length === 0) return;
 
-    const rect = el.getBoundingClientRect();
-    const isBelowFold = rect.top >= window.innerHeight;
+    // Помечаем как запланированный для анимации
+    el.dataset.splitAnimated = 'true';
 
-    if (isBelowFold) {
-      // Проверяем, что ещё не анимировано
-      const firstWord = words[0];
-      if (firstWord && firstWord.style.transform === 'translate(0px, 0%)') return;
-
-      gsap.fromTo(words,
-        { y: '110%' },
-        {
-          y: '0%',
-          duration: 0.7,
-          stagger: 0.04,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          }
+    gsap.fromTo(words,
+      { y: '110%' },
+      {
+        y: '0%',
+        duration: 0.85,
+        stagger: 0.04,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
         }
-      );
-    }
+      }
+    );
   });
 }
 
