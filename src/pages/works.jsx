@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import casesData from "../../data/cases.json";
 
 export default function Page() {
   return (
@@ -35,68 +36,32 @@ export default function Page() {
               data-filter="visual-identity">Visual Identity</button>
           </div>
 
-          {/* CASES GRID */}
           <div className="cases-grid grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-[26px]" id="cases-grid">
-
-            <a href="/cases/futurist" className="case-card group block relative" data-case-card data-reveal-up>
-              <div className="overflow-hidden">
-                <img src="/assets/images/cases/1-futurist.webp" alt="FUTURIST"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy" />
-              </div>
-              <div className="mt-4">
-                <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">FUTURIST</h3>
-                <p className="text-muted text-[14px] mt-1">Авторский ресторан</p>
-              </div>
-            </a>
-
-            <a href="/cases/maison" className="case-card group block relative" data-case-card data-reveal-up>
-              <div className="overflow-hidden">
-                <img src="/assets/images/cases/2-maison.webp" alt="MAISON ROUGE"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy" />
-              </div>
-              <div className="mt-4">
-                <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">MAISON ROUGE</h3>
-                <p className="text-muted text-[14px] mt-1">Премиальный рестоклуб</p>
-              </div>
-            </a>
-
-            <a href="/cases/mouse" className="case-card group block relative" data-case-card data-reveal-up>
-              <div className="overflow-hidden">
-                <img src="/assets/images/cases/3-mouse.webp" alt="Mouse House"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy" />
-              </div>
-              <div className="mt-4">
-                <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">Mouse House</h3>
-                <p className="text-muted text-[14px] mt-1">Семейный ресторан и клуб</p>
-              </div>
-            </a>
-
-            <a href="/cases/zavod" className="case-card group block relative" data-case-card data-reveal-up>
-              <div className="overflow-hidden">
-                <img src="/assets/images/cases/4-zavod.webp" alt="ZAVOD COFFEE"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy" />
-              </div>
-              <div className="mt-4">
-                <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">ZAVOD COFFEE</h3>
-                <p className="text-muted text-[14px] mt-1">Обжарщик кофе</p>
-              </div>
-            </a>
-
-            <a href="/cases/play-cafe" className="case-card group block relative" data-case-card data-reveal-up>
-              <div className="overflow-hidden">
-                <img src="/assets/images/cases/5-play-cafe.webp" alt="ДЕТСТВО Play Café"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy" />
-              </div>
-              <div className="mt-4">
-                <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">ДЕТСТВО Play Café</h3>
-                <p className="text-muted text-[14px] mt-1">Семейное кафе с детским театром</p>
-              </div>
-            </a>
+            {casesData.map((project) => (
+              <a
+                key={project.slug}
+                href={`/cases/${project.slug}`}
+                className="case-card group block relative"
+                data-case-card
+                data-tags={project.tags ? project.tags.join(",") : ""}
+                data-reveal-up
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={project.cover}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted text-[14px] mt-1">{project.subtitle}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
