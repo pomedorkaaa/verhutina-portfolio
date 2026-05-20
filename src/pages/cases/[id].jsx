@@ -1,6 +1,32 @@
 import Layout from "../../components/Layout";
 import casesData from "../../../data/cases.json";
 
+function MediaItem({ item, className = "" }) {
+  if (!item || !item.src) return null;
+
+  if (item.type === "video") {
+    return (
+      <video
+        src={item.src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className={`w-full h-full object-cover ${className}`}
+      />
+    );
+  }
+
+  return (
+    <img
+      src={item.src}
+      alt="Case media"
+      className={`w-full h-full object-cover ${className}`}
+      loading="lazy"
+    />
+  );
+}
+
 export async function getStaticData() {
   return casesData.map((item) => ({
     props: {
@@ -104,6 +130,30 @@ export default function Page({ currentCase, allCases }) {
           </div>
         </div>
       </section>
+
+      {currentCase.mediaBlocks && (
+        <section className="px-5 md:px-10 pb-12">
+          <div className="max-w-[1400px] mx-auto">
+            {/* Первый ряд: два блока */}
+            {currentCase.mediaBlocks.row1 && currentCase.mediaBlocks.row1.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-[26px] mb-5 md:mb-[26px]">
+                {currentCase.mediaBlocks.row1.map((item, idx) => (
+                  <div key={idx} className="overflow-hidden aspect-square md:aspect-[4/5] bg-neutral-900/50" data-reveal-up>
+                    <MediaItem item={item} />
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            {/* Второй ряд: один широкий блок */}
+            {currentCase.mediaBlocks.row2 && currentCase.mediaBlocks.row2.src && (
+              <div className="overflow-hidden w-full bg-neutral-900/50" data-reveal-up>
+                <MediaItem item={currentCase.mediaBlocks.row2} />
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       <section className="py-20 px-5 md:px-10">
         <div className="max-w-[1400px] mx-auto">

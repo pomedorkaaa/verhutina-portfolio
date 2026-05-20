@@ -23,7 +23,23 @@
         "value": "~1,8%",
         "label": "ER Reels на ключевых постах (до 2 014 сохранений, до 1 513 репостов)"
       }
-    ]
+    ],
+    "mediaBlocks": {
+      "row1": [
+        {
+          "type": "image",
+          "src": "/assets/images/cases/futurist/row1-left.webp"
+        },
+        {
+          "type": "video",
+          "src": "/assets/images/cases/futurist/row1-right.mp4"
+        }
+      ],
+      "row2": {
+        "type": "image",
+        "src": "/assets/images/cases/futurist/row2.webp"
+      }
+    }
   },
   {
     "slug": "maison",
@@ -35,7 +51,23 @@
     "task": "Сформировать SMM-стратегию, выделить бренд среди премиум-конкурентов, задать узнаваемый визуальный код и предложить шаги по масштабированию узнаваемости и посещений.",
     "role": "- Разработка SMM-стратегии, включая анализ конкурентов и составление портрета аудитории в соцсетях.\n- Совместная разработка с дизайнером айдентики бренда и графики.\n- Формирование Tone of Voice и примеры текстов с копирайтером.\n- Рекомендации по influence и таргету.\n- Постановка KPI и шаблон отчетности.",
     "result": "Полный стратегический пакет: исследование, позиционирование, контент-система, визуальная айдентика, influence-маркетинг, рекомендации по таргету, медиаплан и KPI.\nКонтент-матрица: мудборд ленты, 9 контентных рубрик, 15 сценариев Reels, сюжеты stories, концепция афиш и коллабораций.",
-    "stats": []
+    "stats": [],
+    "mediaBlocks": {
+      "row1": [
+        {
+          "type": "image",
+          "src": "/assets/images/cases/maison/row1-left.webp"
+        },
+        {
+          "type": "video",
+          "src": "/assets/images/cases/maison/row1-right.mp4"
+        }
+      ],
+      "row2": {
+        "type": "image",
+        "src": "/assets/images/cases/maison/row2.webp"
+      }
+    }
   },
   {
     "slug": "mouse",
@@ -61,7 +93,23 @@
         "value": "с 0,6% до 1,0%",
         "label": "рост ER за 3 месяца"
       }
-    ]
+    ],
+    "mediaBlocks": {
+      "row1": [
+        {
+          "type": "image",
+          "src": "/assets/images/cases/mouse/row1-left.webp"
+        },
+        {
+          "type": "video",
+          "src": "/assets/images/cases/mouse/row1-right.mp4"
+        }
+      ],
+      "row2": {
+        "type": "image",
+        "src": "/assets/images/cases/mouse/row2.webp"
+      }
+    }
   },
   {
     "slug": "zavod",
@@ -83,14 +131,30 @@
         "label": "Прирост подписчиков"
       },
       {
-        "value": "~350-450 на пост",
+        "value": "~350-450 на post",
         "label": "Просмотры"
       },
       {
         "value": "1,5% - 2,1%",
         "label": "Стабильный ER на уровне"
       }
-    ]
+    ],
+    "mediaBlocks": {
+      "row1": [
+        {
+          "type": "image",
+          "src": "/assets/images/cases/zavod/row1-left.webp"
+        },
+        {
+          "type": "video",
+          "src": "/assets/images/cases/zavod/row1-right.mp4"
+        }
+      ],
+      "row2": {
+        "type": "image",
+        "src": "/assets/images/cases/zavod/row2.webp"
+      }
+    }
   },
   {
     "slug": "play-cafe",
@@ -116,6 +180,22 @@
         "value": "3,7% за месяц",
         "label": "ER канала"
       }
-    ]
+    ],
+    "mediaBlocks": {
+      "row1": [
+        {
+          "type": "image",
+          "src": "/assets/images/cases/play-cafe/row1-left.webp"
+        },
+        {
+          "type": "video",
+          "src": "/assets/images/cases/play-cafe/row1-right.mp4"
+        }
+      ],
+      "row2": {
+        "type": "image",
+        "src": "/assets/images/cases/play-cafe/row2.webp"
+      }
+    }
   }
 ]
