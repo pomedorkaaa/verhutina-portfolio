@@ -16,7 +16,6 @@ export default function Layout({ title, pageName = "home", children }) {
         <script defer src="/assets/js/vendor/ScrollTrigger.min.js?v=2"></script>
         <script defer src="/assets/js/vendor/lenis.min.js?v=2"></script>
         <script defer src="/assets/js/main.js?v=2"></script>
-        <script defer src="/assets/js/vendor/checkVendorUpdates.js?v=2"></script>
       </Head>
       <Header pageName={pageName} />
       <main id="page-content">

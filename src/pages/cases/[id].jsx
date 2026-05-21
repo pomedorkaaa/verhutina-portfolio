@@ -1,71 +1,8 @@
 import Layout from "../../components/Layout";
+import MediaItem from "../../components/MediaItem";
+import BloggersTable from "../../components/BloggersTable";
+import CaseCard from "../../components/CaseCard";
 import casesData from "../../../data/cases.json";
-
-function VideoPlayer({ src, className = "" }) {
-  return (
-    <div className="relative w-full h-full group video-player-container">
-      <video
-        src={src}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className={`w-full h-full object-cover cursor-pointer ${className}`}
-      />
-      <button
-        className="video-mute-btn absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/10 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
-        aria-label="Включить звук"
-        title="Включить звук"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-4 h-4 mute-icon"
-        >
-          <path d="M11 5L6 9H2v6h4l5 4V5z" />
-          <line x1="23" y1="9" x2="17" y2="15" />
-          <line x1="17" y1="9" x2="23" y2="15" />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-4 h-4 sound-icon hidden"
-        >
-          <path d="M11 5L6 9H2v6h4l5 4V5z" />
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-        </svg>
-      </button>
-    </div>
-  );
-}
-
-function MediaItem({ item, className = "" }) {
-  if (!item || !item.src) return null;
-
-  if (item.type === "video") {
-    return <VideoPlayer src={item.src} className={className} />;
-  }
-
-  return (
-    <img
-      src={item.src}
-      alt="Case media"
-      className={`w-full h-full object-cover ${className}`}
-      loading="lazy"
-    />
-  );
-}
 
 export async function getStaticData() {
   const fs = await import('fs');
@@ -246,57 +183,8 @@ export default function Page({ currentCase, allCases }) {
             )}
           </div>
 
-          {/* Секция таблицы блогеров (если есть в данных) */}
-          {currentCase.bloggers && currentCase.bloggers.length > 0 && (
-            <div className="mt-20 overflow-hidden" data-reveal-up>
-              <div className="bg-[#0b0c0e]/80 border border-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-md">
-                <div className="flex items-center gap-2 mb-6">
-                  <h3 className="text-[20px] md:text-[24px] font-medium tracking-tight-custom uppercase text-white">
-                    Блогеры
-                  </h3>
-                  <span className="text-muted/60 text-sm cursor-help" title="Результаты интеграций с блогерами">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="w-4 h-4"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="16" x2="12" y2="12" />
-                      <line x1="12" y1="8" x2="12.01" y2="8" />
-                    </svg>
-                  </span>
-                </div>
-                
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse text-[14px] font-normal tracking-tight-custom text-muted">
-                    <thead>
-                      <tr className="border-b border-white/10 text-white font-medium">
-                        <th className="py-4 pr-4">Название канала</th>
-                        <th className="py-4 px-4 whitespace-nowrap">Кол-во подписчиков</th>
-                        <th className="py-4 px-4">Условия размещения</th>
-                        <th className="py-4 pl-4 whitespace-nowrap">Приход подписчиков</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5">
-                      {currentCase.bloggers.map((blogger, idx) => (
-                        <tr key={idx} className="hover:bg-white/[0.01] transition-colors">
-                          <td className="py-4 pr-4 text-white font-medium">{blogger.channel}</td>
-                          <td className="py-4 px-4">{blogger.followers}</td>
-                          <td className="py-4 px-4 max-w-[300px] leading-relaxed">{blogger.terms}</td>
-                          <td className="py-4 pl-4">{blogger.result}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          )}
+          {/* Таблица блогеров */}
+          <BloggersTable bloggers={currentCase.bloggers} />
         </div>
       </section>
 
@@ -352,30 +240,7 @@ export default function Page({ currentCase, allCases }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-[26px]">
             {moreProjects.map((project) => (
-              <a
-                key={project.slug}
-                href={`/cases/${project.slug}`}
-                className="case-card group block relative"
-                data-case-card
-                data-reveal-up
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={project.cover}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-[15px] font-medium tracking-tighter-custom uppercase">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted text-[14px] mt-1">
-                    {project.subtitle}
-                  </p>
-                </div>
-              </a>
+              <CaseCard key={project.slug} project={project} />
             ))}
           </div>
         </div>

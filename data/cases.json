@@ -3,7 +3,10 @@
     "slug": "futurist",
     "title": "FUTURIST",
     "subtitle": "Авторский ресторан",
-    "tags": ["digital", "marketing-materials"],
+    "tags": [
+      "digital",
+      "marketing-materials"
+    ],
     "cover": "/assets/images/cases/1-futurist.webp",
     "cover_section": "/assets/images/cases/section/1.webp",
     "task": "Продвижение бренда через Instagram*: повышение узнаваемости, рост подписчиков и вовлеченности (ER/охваты), а также отражение концепции ресторана в едином стиле и регулярное попадание в рекомендации (посты/Reels).",
@@ -45,7 +48,10 @@
     "slug": "maison",
     "title": "MAISON ROUGE",
     "subtitle": "Премиальный рестоклуб",
-    "tags": ["brand-strategy", "visual-identity"],
+    "tags": [
+      "brand-strategy",
+      "visual-identity"
+    ],
     "cover": "/assets/images/cases/2-maison.webp",
     "cover_section": "/assets/images/cases/section/2.webp",
     "task": "Сформировать SMM-стратегию, выделить бренд среди премиум-конкурентов, задать узнаваемый визуальный код и предложить шаги по масштабированию узнаваемости и посещений.",
@@ -73,7 +79,10 @@
     "slug": "mouse",
     "title": "Mouse House",
     "subtitle": "Семейный ресторан и клуб",
-    "tags": ["digital", "marketing-materials"],
+    "tags": [
+      "digital",
+      "marketing-materials"
+    ],
     "cover": "/assets/images/cases/3-mouse.webp",
     "cover_section": "/assets/images/cases/section/3.webp",
     "task": "Ведение аккаунта Instagram*, обновление визуального стиля, регулярное освещение деятельности центра, обеспечение попадания Reels/постов в рекомендации и рост вовлеченности (ER).",
@@ -115,7 +124,10 @@
     "slug": "zavod",
     "title": "ZAVOD COFFEE",
     "subtitle": "Обжарщик кофе",
-    "tags": ["digital", "brand-strategy"],
+    "tags": [
+      "digital",
+      "brand-strategy"
+    ],
     "cover": "/assets/images/cases/4-zavod.webp",
     "cover_section": "/assets/images/cases/section/4.webp",
     "task": "Развитие присутствия в соцсетях с фокусом на Telegram-канал бренда, формирование позитивного образа и повышение узнаваемости среди ЦА; прирост подписчиков, увеличение ER.",
@@ -160,13 +172,16 @@
     "slug": "play-cafe",
     "title": "ДЕТСТВО Play Café",
     "subtitle": "Семейное кафе с детским театром",
-    "tags": ["digital", "brand-strategy"],
+    "tags": [
+      "digital",
+      "brand-strategy"
+    ],
     "cover": "/assets/images/cases/5-play-cafe.webp",
     "cover_section": "/assets/images/cases/section/5.webp",
     "task": "Сформировать позитивный образ бренда и повысить узнаваемость; привлечь релевантную ЦА в Telegram и ВКонтакте; повысить лояльность и вовлеченность за счет регулярных касаний и актуального контента.",
     "role": "Разработка SMM-стратегии совместно с дизайнером и копирайтером; оформление аккаунтов, подготовка контент-плана и графика публикаций; съемка/монтаж клипов под соцсети; адаптация форматов под площадки; работа с родительскими сообществами и ЖК/районными группами (локальный influence), запуск UGC-механик.",
     "result": "Прирост ЦА, рост узнаваемости и вовлеченности за счет транслируемого контента, сотрудничество с блогерами и запуск таргета. В Telegram основной источник трафика — URL и кросс-промо (~65%) — за счет influence и рекламы у партнеров.",
-    "statsTitle": "Telegramm",
+    "statsTitle": "Telegram",
     "stats": [
       {
         "value": "+782",
