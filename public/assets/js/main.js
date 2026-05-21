@@ -871,8 +871,7 @@ function initVideoPlayers() {
       soundIcon.classList.remove('hidden');
     }
 
-    // При клике переключаем звук
-    muteBtn.addEventListener('click', (e) => {
+    const toggleMute = (e) => {
       e.preventDefault();
       e.stopPropagation();
 
@@ -889,6 +888,10 @@ function initVideoPlayers() {
         muteBtn.setAttribute('aria-label', 'Выключить звук');
         muteBtn.setAttribute('title', 'Выключить звук');
       }
-    });
+    };
+
+    // При клике на кнопку или на само видео переключаем звук
+    muteBtn.addEventListener('click', toggleMute);
+    video.addEventListener('click', toggleMute);
   });
 }

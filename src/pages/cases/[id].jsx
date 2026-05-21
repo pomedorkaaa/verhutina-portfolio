@@ -10,10 +10,10 @@ function VideoPlayer({ src, className = "" }) {
         loop
         muted
         playsInline
-        className={`w-full h-full object-cover ${className}`}
+        className={`w-full h-full object-cover cursor-pointer ${className}`}
       />
       <button
-        className="video-mute-btn absolute bottom-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/10 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+        className="video-mute-btn absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/10 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
         aria-label="Включить звук"
         title="Включить звук"
       >
@@ -25,7 +25,7 @@ function VideoPlayer({ src, className = "" }) {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="w-3.5 h-3.5 mute-icon"
+          className="w-4 h-4 mute-icon"
         >
           <path d="M11 5L6 9H2v6h4l5 4V5z" />
           <line x1="23" y1="9" x2="17" y2="15" />
@@ -39,7 +39,7 @@ function VideoPlayer({ src, className = "" }) {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="w-3.5 h-3.5 sound-icon hidden"
+          className="w-4 h-4 sound-icon hidden"
         >
           <path d="M11 5L6 9H2v6h4l5 4V5z" />
           <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
