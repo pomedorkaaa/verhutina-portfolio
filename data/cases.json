@@ -59,8 +59,8 @@
           "src": "/assets/images/cases/maison/row1-left.webp"
         },
         {
-          "type": "video",
-          "src": "/assets/images/cases/maison/row1-right.mp4"
+          "type": "image",
+          "src": "/assets/images/cases/maison/row1-right.webp"
         }
       ],
       "row2": {
