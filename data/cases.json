@@ -97,8 +97,8 @@
     "mediaBlocks": {
       "row1": [
         {
-          "type": "image",
-          "src": "/assets/images/cases/mouse/row1-left.webp"
+          "type": "video",
+          "src": "/assets/images/cases/mouse/row1-left.mp4"
         },
         {
           "type": "video",

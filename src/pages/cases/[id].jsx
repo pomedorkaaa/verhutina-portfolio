@@ -1,20 +1,78 @@
+import { useState, useRef } from "react";
 import Layout from "../../components/Layout";
 import casesData from "../../../data/cases.json";
+
+function VideoPlayer({ src, className = "" }) {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
+
+  const toggleMute = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  return (
+    <div className="relative w-full h-full group">
+      <video
+        ref={videoRef}
+        src={src}
+        autoPlay
+        loop
+        muted={isMuted}
+        playsInline
+        className={`w-full h-full object-cover ${className}`}
+      />
+      <button
+        onClick={toggleMute}
+        className="absolute bottom-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/10 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+        aria-label={isMuted ? "Включить звук" : "Выключить звук"}
+        title={isMuted ? "Включить звук" : "Выключить звук"}
+      >
+        {isMuted ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-4.5 h-4.5"
+          >
+            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+            <line x1="23" y1="9" x2="17" y2="15" />
+            <line x1="17" y1="9" x2="23" y2="15" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-4.5 h-4.5"
+          >
+            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </svg>
+        )}
+      </button>
+    </div>
+  );
+}
 
 function MediaItem({ item, className = "" }) {
   if (!item || !item.src) return null;
 
   if (item.type === "video") {
-    return (
-      <video
-        src={item.src}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className={`w-full h-full object-cover ${className}`}
-      />
-    );
+    return <VideoPlayer src={item.src} className={className} />;
   }
 
   return (
