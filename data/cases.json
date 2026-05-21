@@ -149,11 +149,7 @@
           "type": "video",
           "src": "/assets/images/cases/zavod/row1-right.mp4"
         }
-      ],
-      "row2": {
-        "type": "image",
-        "src": "/assets/images/cases/zavod/row2.webp"
-      }
+      ]
     }
   },
   {
