@@ -281,3 +281,18 @@ html.is-transitioning {
 html.is-transitioning body {
   pointer-events: none;
 }
+
+/* ============================================================
+   АДАПТИВНАЯ ГРИД-РАСКЛАДКА ДЛЯ МЕДИА КЕЙСОВ
+   ============================================================ */
+
+.case-media-row-item {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .case-media-row-item {
+    flex: var(--aspect-ratio) var(--aspect-ratio) 0%;
+  }
+}

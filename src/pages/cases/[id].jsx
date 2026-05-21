@@ -68,10 +68,77 @@ function MediaItem({ item, className = "" }) {
 }
 
 export async function getStaticData() {
-  return casesData.map((item) => ({
+  const fs = await import('fs');
+  const path = await import('path');
+  const { exec } = await import('child_process');
+  const { promisify } = await import('util');
+  const execAsync = promisify(exec);
+
+  const getAspectRatio = async (relativeSrc) => {
+    const filePath = path.join(process.cwd(), 'public', relativeSrc);
+    if (!fs.existsSync(filePath)) {
+      return 1;
+    }
+    
+    // 1. Через mdls (macOS)
+    try {
+      const { stdout } = await execAsync(`mdls -name kMDItemPixelWidth -name kMDItemPixelHeight "${filePath}"`);
+      const widthMatch = stdout.match(/kMDItemPixelWidth\s*=\s*(\d+)/);
+      const heightMatch = stdout.match(/kMDItemPixelHeight\s*=\s*(\d+)/);
+      if (widthMatch && heightMatch) {
+        const width = parseInt(widthMatch[1], 10);
+        const height = parseInt(heightMatch[1], 10);
+        if (width > 0 && height > 0) {
+          return width / height;
+        }
+      }
+    } catch (e) {
+      // Игнорируем
+    }
+
+    // 2. Фолбек для картинок через sharp
+    const ext = path.extname(filePath).toLowerCase();
+    if (['.png', '.jpg', '.jpeg', '.webp'].includes(ext)) {
+      try {
+        const { default: sharp } = await import('sharp');
+        const metadata = await sharp(filePath).metadata();
+        if (metadata.width && metadata.height) {
+          return metadata.width / metadata.height;
+        }
+      } catch (e) {
+        // Игнорируем
+      }
+    }
+
+    return 1;
+  };
+
+  const processedCases = await Promise.all(
+    casesData.map(async (c) => {
+      const mediaBlocks = { ...c.mediaBlocks };
+      
+      if (mediaBlocks.row1) {
+        mediaBlocks.row1 = await Promise.all(
+          mediaBlocks.row1.map(async (item) => {
+            const ratio = await getAspectRatio(item.src);
+            return { ...item, aspectRatio: ratio };
+          })
+        );
+      }
+      
+      if (mediaBlocks.row2) {
+        const ratio = await getAspectRatio(mediaBlocks.row2.src);
+        mediaBlocks.row2 = { ...mediaBlocks.row2, aspectRatio: ratio };
+      }
+      
+      return { ...c, mediaBlocks };
+    })
+  );
+
+  return processedCases.map((item) => ({
     props: {
       currentCase: item,
-      allCases: casesData,
+      allCases: processedCases,
     },
     paths: { id: item.slug },
   }));
@@ -184,14 +251,22 @@ export default function Page({ currentCase, allCases }) {
       {currentCase.mediaBlocks && (
         <section className="px-5 md:px-10 pb-12">
           <div className="max-w-[1400px] mx-auto">
-            {/* Первый ряд: два блока */}
+            {/* Первый ряд: два блока с адаптивным выравниванием Flexbox */}
             {currentCase.mediaBlocks.row1 && currentCase.mediaBlocks.row1.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-[26px] mb-5 md:mb-[26px]">
-                {currentCase.mediaBlocks.row1.map((item, idx) => (
-                  <div key={idx} className="overflow-hidden aspect-square md:aspect-[4/5] bg-neutral-900/50" data-reveal-up>
-                    <MediaItem item={item} />
-                  </div>
-                ))}
+              <div className="flex flex-col md:flex-row gap-5 md:gap-[26px] mb-5 md:mb-[26px] items-stretch">
+                {currentCase.mediaBlocks.row1.map((item, idx) => {
+                  const ratio = item.aspectRatio || 1;
+                  return (
+                    <div
+                      key={idx}
+                      className="overflow-hidden bg-neutral-900/50 case-media-row-item relative"
+                      style={{ '--aspect-ratio': ratio }}
+                      data-reveal-up
+                    >
+                      <MediaItem item={item} />
+                    </div>
+                  );
+                })}
               </div>
             )}
             
