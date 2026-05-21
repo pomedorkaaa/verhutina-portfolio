@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "minista",
     "build": "minista build",
-    "preview": "minista preview"
+    "preview": "minista preview",
+    "optimize": "node scripts/optimize-media.js"
   },
   "devDependencies": {
     "autoprefixer": "^10.5.0",
