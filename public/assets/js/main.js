@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initFilters();
   initParallax();
+  initVideoPlayers();
 
   // Запускаем анимацию входа на страницу
   initPageEnter(isFromTransition);
@@ -476,6 +477,7 @@ function reinitScripts() {
   initMobileMenu(); 
   initFilters();
   initParallax();
+  initVideoPlayers();
 
   // Запускаем scroll-reveal для элементов ниже fold
   initScrollReveals();
@@ -842,5 +844,51 @@ function initHeroScrollBlur() {
       end: 'bottom top',     // Заканчиваем когда hero полностью ушёл вверх
       scrub: 0.5,            // Плавная привязка к скроллу
     },
+  });
+}
+
+
+/* ============================================================
+   VIDEO PLAYERS (Интерактивные видеоплееры с управлением звуком)
+   ============================================================ */
+
+function initVideoPlayers() {
+  const containers = document.querySelectorAll('.video-player-container');
+  containers.forEach(container => {
+    const video = container.querySelector('video');
+    const muteBtn = container.querySelector('.video-mute-btn');
+    if (!video || !muteBtn) return;
+
+    const muteIcon = muteBtn.querySelector('.mute-icon');
+    const soundIcon = muteBtn.querySelector('.sound-icon');
+
+    // Настраиваем начальное состояние
+    if (video.muted) {
+      muteIcon.classList.remove('hidden');
+      soundIcon.classList.add('hidden');
+    } else {
+      muteIcon.classList.add('hidden');
+      soundIcon.classList.remove('hidden');
+    }
+
+    // При клике переключаем звук
+    muteBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      video.muted = !video.muted;
+
+      if (video.muted) {
+        muteIcon.classList.remove('hidden');
+        soundIcon.classList.add('hidden');
+        muteBtn.setAttribute('aria-label', 'Включить звук');
+        muteBtn.setAttribute('title', 'Включить звук');
+      } else {
+        muteIcon.classList.add('hidden');
+        soundIcon.classList.remove('hidden');
+        muteBtn.setAttribute('aria-label', 'Выключить звук');
+        muteBtn.setAttribute('title', 'Выключить звук');
+      }
+    });
   });
 }
