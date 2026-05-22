@@ -1,0 +1,56 @@
+/* ============================================================
+   NAVIGATION.CSS — Стили навигации, фильтров и карточек кейсов
+   ============================================================ */
+
+/* Навбар */
+#navbar {
+  border-bottom: 0.5px solid transparent;
+  backdrop-filter: none;
+  background-color: transparent;
+  transition: background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+#navbar.scrolled {
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  background-color: rgba(15, 15, 15, 0.8);
+}
+
+/* Карточки кейсов */
+.case-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 15, 15, 0);
+  transition: background 0.5s ease;
+  pointer-events: none;
+}
+
+.case-card:hover::after {
+  background: rgba(15, 15, 15, 0.1);
+}
+
+/* Фильтры */
+.filter-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.filter-btn.active {
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Адаптивная грид-раскладка для медиа кейсов */
+.case-media-row-item {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .case-media-row-item {
+    flex: var(--aspect-ratio) var(--aspect-ratio) 0%;
+  }
+}

@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import CaseCard from "../components/CaseCard";
+import CaseFilters from "../components/CaseFilters";
 import casesData from "../../data/cases.json";
 
 export default function Page() {
@@ -13,29 +14,7 @@ export default function Page() {
             data-split-text>All works</h1>
 
           {/* FILTERS */}
-          <div className="flex flex-wrap gap-3 mb-12" data-reveal-up>
-            <button
-              className="filter-btn active text-[15px] font-normal tracking-tight-custom uppercase text-primary/80 border-b border-primary/30 pb-1 hover:border-primary transition-colors"
-              data-filter="all">All works</button>
-            <button
-              className="filter-btn text-[15px] font-normal tracking-tight-custom uppercase text-muted border-b border-transparent pb-1 hover:border-primary/30 transition-colors"
-              data-filter="art-direction">Art Direction</button>
-            <button
-              className="filter-btn text-[15px] font-normal tracking-tight-custom uppercase text-muted border-b border-transparent pb-1 hover:border-primary/30 transition-colors"
-              data-filter="brand-strategy">Brand Strategy</button>
-            <button
-              className="filter-btn text-[15px] font-normal tracking-tight-custom uppercase text-muted border-b border-transparent pb-1 hover:border-primary/30 transition-colors"
-              data-filter="digital">Digital</button>
-            <button
-              className="filter-btn text-[15px] font-normal tracking-tight-custom uppercase text-muted border-b border-transparent pb-1 hover:border-primary/30 transition-colors"
-              data-filter="marketing-materials">Marketing Materials</button>
-            <button
-              className="filter-btn text-[15px] font-normal tracking-tight-custom uppercase text-muted border-b border-transparent pb-1 hover:border-primary/30 transition-colors"
-              data-filter="packaging">Packaging</button>
-            <button
-              className="filter-btn text-[15px] font-normal tracking-tight-custom uppercase text-muted border-b border-transparent pb-1 hover:border-primary/30 transition-colors"
-              data-filter="visual-identity">Visual Identity</button>
-          </div>
+          <CaseFilters />
 
           <div className="cases-grid grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-[26px]" id="cases-grid">
             {casesData.map((project) => (
@@ -44,9 +23,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-
 
     </Layout>
   );

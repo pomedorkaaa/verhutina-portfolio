@@ -1,0 +1,73 @@
+/* ============================================================
+   TRANSITIONS.CSS — Система SPA-переходов между страницами
+   ============================================================ */
+
+/* Временный контейнер для новой страницы во время ее наезжания */
+.page-transition-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 99999;
+  background-color: #0f0f0f;
+  transform: translateY(100vh);
+  will-change: transform;
+  box-shadow: 0 -25px 50px -12px rgba(0, 0, 0, 0.6);
+  /* Скрываем полосу прокрутки для точного совпадения ширины с body */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.page-transition-container::-webkit-scrollbar {
+  display: none; /* Safari, Chrome, Opera */
+}
+
+#page-content {
+  will-change: opacity, transform;
+}
+
+/* Начальное состояние контента при первом входе, пока не отработал JS */
+html:not(.page-ready) #page-content {
+  opacity: 0;
+  transform: translateY(30px) scale(0.99);
+}
+
+/* Контент внутри transition-container управляется JS, не скрываем его CSS-ом */
+.page-transition-container #page-content {
+  opacity: 1;
+  transform: none;
+}
+
+/* Состояние готовности страницы */
+html.page-ready #page-content {
+  will-change: auto;
+}
+
+/* Навигация анимируется отдельно */
+#navbar {
+  opacity: 0;
+}
+
+/* Навбар внутри transition-container принудительно видим */
+.page-transition-container #navbar {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Плавный курсор при переходе */
+html.is-transitioning {
+  cursor: wait;
+}
+
+html.is-transitioning,
+html.is-transitioning body {
+  overflow: hidden !important;
+  height: 100vh !important;
+  position: relative;
+}
+
+html.is-transitioning body {
+  pointer-events: none;
+}
