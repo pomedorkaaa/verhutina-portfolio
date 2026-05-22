@@ -1,5 +1,5 @@
-import Layout from "../components/Layout";
-import ArchiveItem from "../components/ArchiveItem";
+import Layout from "@/components/Layout";
+import ArchiveItem from "@/components/ArchiveItem";
 
 /**
  * Данные элементов галереи.

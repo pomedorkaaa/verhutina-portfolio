@@ -1,4 +1,4 @@
-import MediaItem from "../MediaItem";
+import MediaItem from "@/components/MediaItem";
 
 /**
  * Секция медиа-контента кейса (два ряда: row1 с пропорциональными колонками и row2 на всю ширину).

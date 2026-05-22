@@ -5,6 +5,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve("src"),
+      "@data": path.resolve("data"),
     },
   },
 });

@@ -1,7 +1,7 @@
 import { Head } from "minista";
 import Header from "./Header";
 import Footer from "./Footer";
-import "../assets/css/global.css";
+import "@/assets/css/global.css";
 
 export default function Layout({ title, pageName = "home", children }) {
   return (

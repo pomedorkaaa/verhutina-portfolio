@@ -1,12 +1,12 @@
-import Layout from "../../components/Layout";
-import BloggersTable from "../../components/BloggersTable";
-import CaseHero from "../../components/case/CaseHero";
-import CaseDetails from "../../components/case/CaseDetails";
-import CaseStats from "../../components/case/CaseStats";
-import CaseMedia from "../../components/case/CaseMedia";
-import MoreProjects from "../../components/MoreProjects";
-import { getAspectRatio } from "../../utils/getAspectRatio";
-import casesData from "../../../data/cases.json";
+import Layout from "@/components/Layout";
+import BloggersTable from "@/components/BloggersTable";
+import CaseHero from "@/components/case/CaseHero";
+import CaseDetails from "@/components/case/CaseDetails";
+import CaseStats from "@/components/case/CaseStats";
+import CaseMedia from "@/components/case/CaseMedia";
+import MoreProjects from "@/components/MoreProjects";
+import { getAspectRatio } from "@/utils/getAspectRatio";
+import casesData from "@data/cases.json";
 
 export async function getStaticData() {
   const processedCases = await Promise.all(

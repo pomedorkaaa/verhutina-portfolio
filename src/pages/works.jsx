@@ -1,7 +1,7 @@
-import Layout from "../components/Layout";
-import CaseCard from "../components/CaseCard";
-import CaseFilters from "../components/CaseFilters";
-import casesData from "../../data/cases.json";
+import Layout from "@/components/Layout";
+import CaseCard from "@/components/CaseCard";
+import CaseFilters from "@/components/CaseFilters";
+import casesData from "@data/cases.json";
 
 export default function Page() {
   return (
