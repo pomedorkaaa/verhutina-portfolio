@@ -278,6 +278,13 @@ html.is-transitioning {
   cursor: wait;
 }
 
+html.is-transitioning,
+html.is-transitioning body {
+  overflow: hidden !important;
+  height: 100vh !important;
+  position: relative;
+}
+
 html.is-transitioning body {
   pointer-events: none;
 }

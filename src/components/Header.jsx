@@ -1,6 +1,6 @@
 export default function Header({ pageName }) {
   return (
-    <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-10 py-4 ">
+    <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-10 py-5 md:py-4 ">
       <a href="/" className="nav-logo text-[15px] font-semibold tracking-tight-custom uppercase absolute text-primary">Мария©</a>
 
       <ul className="hidden md:flex items-center flex-grow justify-center gap-6">

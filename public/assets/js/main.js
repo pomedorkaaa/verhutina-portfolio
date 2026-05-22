@@ -391,6 +391,8 @@ async function loadPage(href, pushState = true) {
         requestAnimationFrame(() => {
           reinitScripts();
 
+          // Перед удалением сбрасываем скролл контейнера
+          transitionContainer.scrollTop = 0;
           // Удаляем временный контейнер только после того, как основной контент готов и анимирован
           transitionContainer.remove();
 
@@ -398,9 +400,13 @@ async function loadPage(href, pushState = true) {
           document.documentElement.classList.remove('is-transitioning');
           document.documentElement.classList.add('page-ready');
 
+          // Повторно принудительно сбрасываем скролл окна, гася инерцию скролла в браузере
+          window.scrollTo(0, 0);
+
           // Возобновляем скроллинг
           if (window.lenis) {
             window.lenis.resize();
+            window.lenis.scrollTo(0, { immediate: true });
             window.lenis.start();
           }
         });
@@ -471,6 +477,9 @@ function updateActiveHeaderLinks(pathname) {
 function reinitScripts() {
   // Убиваем оставшиеся ScrollTrigger инстансы
   ScrollTrigger.getAll().forEach(t => t.kill());
+
+  // Сбрасываем overflow body, на случай если переход был из открытого мобильного меню
+  document.body.style.overflow = '';
 
   // Заново привязываем листенеры и триггеры
   initNavbar();
@@ -589,6 +598,7 @@ function initMobileMenu() {
 
   function openMenu() {
     isOpen = true;
+    toggle.textContent = 'Закрыть';
     menu.classList.remove('opacity-0', 'pointer-events-none');
     menu.classList.add('opacity-100');
     document.body.style.overflow = 'hidden';
@@ -600,6 +610,7 @@ function initMobileMenu() {
 
   function closeMenu() {
     isOpen = false;
+    toggle.textContent = 'Меню';
     menu.classList.add('opacity-0', 'pointer-events-none');
     menu.classList.remove('opacity-100');
     document.body.style.overflow = '';
@@ -613,7 +624,18 @@ function initMobileMenu() {
   if (close) close.addEventListener('click', closeMenu);
 
   menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      // Если ссылка внешняя или якорь на текущей странице, закрываем меню сразу
+      if (!href || href.startsWith('#') || href.startsWith('http') || link.getAttribute('target') === '_blank') {
+        closeMenu();
+      } else {
+        // Для внутренних AJAX-переходов не закрываем меню мгновенно, чтобы избежать моргания.
+        // Оно перекроется новой страницей, а состояние сбросится при замене навбара.
+        isOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
   });
 }
 
