@@ -255,21 +255,7 @@ async function loadPage(href, pushState = true) {
   document.documentElement.classList.add('is-transitioning');
   document.documentElement.classList.remove('page-ready');
 
-  // Плавно закрываем мобильное меню в начале перехода, чтобы оно затухло во время AJAX-запроса
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuToggle = document.getElementById('menu-toggle');
-  if (mobileMenu) {
-    // Временно отключаем транзишен, чтобы скрыть меню мгновенно без мерцаний при перерендере хедера
-    mobileMenu.style.transition = 'none';
-    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-    mobileMenu.classList.remove('opacity-100');
-    // Заставляем браузер применить стили мгновенно
-    void mobileMenu.offsetHeight;
-    mobileMenu.style.transition = '';
-  }
-  if (menuToggle) {
-    menuToggle.textContent = 'Меню';
-  }
+  // Сбрасываем скролл-блокировку у body для готовности
   document.body.style.overflow = '';
 
   // Останавливаем плавный скроллинг во время перехода
@@ -385,6 +371,32 @@ async function loadPage(href, pushState = true) {
           currentOldNavbar.replaceWith(finalNavbar);
         } else if (finalNavbar) {
           document.body.insertBefore(finalNavbar, oldContent);
+        }
+
+        // Мгновенно скрываем и заменяем мобильное меню на новое, чтобы сбросить состояние и избежать мерцания
+        const currentOldMobileMenu = document.getElementById('mobile-menu');
+        const newMobileMenu = doc.getElementById('mobile-menu');
+        const finalMobileMenu = newMobileMenu ? newMobileMenu.cloneNode(true) : null;
+        
+        if (currentOldMobileMenu) {
+          currentOldMobileMenu.style.transition = 'none';
+          currentOldMobileMenu.classList.add('opacity-0', 'pointer-events-none');
+          currentOldMobileMenu.classList.remove('opacity-100');
+          void currentOldMobileMenu.offsetHeight;
+        }
+
+        if (finalMobileMenu) {
+          finalMobileMenu.style.transition = 'none';
+          finalMobileMenu.classList.add('opacity-0', 'pointer-events-none');
+          finalMobileMenu.classList.remove('opacity-100');
+          void finalMobileMenu.offsetHeight;
+          finalMobileMenu.style.transition = '';
+        }
+
+        if (currentOldMobileMenu && finalMobileMenu) {
+          currentOldMobileMenu.replaceWith(finalMobileMenu);
+        } else if (finalMobileMenu) {
+          document.body.insertBefore(finalMobileMenu, oldContent);
         }
 
         // Обновляем метаданные и заголовок
