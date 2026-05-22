@@ -53,10 +53,11 @@ window.PageTransitions = {
 
     document.body.style.overflow = '';
 
-    // Останавливаем плавный скроллинг
+    // Останавливаем плавный скроллинг и блокируем нативный скролл
     if (window.lenis) {
       window.lenis.stop();
     }
+    this._disableScroll();
 
     // Убиваем все активные GSAP-анимации
     const oldPageContent = document.getElementById('page-content');
@@ -203,6 +204,9 @@ window.PageTransitions = {
             transitionContainer.scrollTop = 0;
             transitionContainer.remove();
 
+            // Восстанавливаем возможность скролла
+            this._enableScroll();
+
             document.documentElement.classList.remove('is-transitioning');
             document.documentElement.classList.add('page-ready');
 
@@ -305,5 +309,43 @@ window.PageTransitions = {
     }
 
     ScrollTrigger.refresh();
+  },
+
+  /**
+   * Блокирует события прокрутки (wheel, touchmove, keydown) во время перехода
+   */
+  _disableScroll() {
+    const preventDefault = (e) => {
+      const keys = ['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'PageUp', 'PageDown', 'End', 'Home'];
+      if (e.type === 'keydown') {
+        if (keys.includes(e.code) || keys.includes(e.key)) {
+          e.preventDefault();
+          return false;
+        }
+      } else {
+        e.preventDefault();
+        return false;
+      }
+    };
+    
+    window.addEventListener('wheel', preventDefault, { passive: false });
+    window.addEventListener('touchmove', preventDefault, { passive: false });
+    window.addEventListener('keydown', preventDefault, { passive: false });
+    
+    this._enableScrollFn = () => {
+      window.removeEventListener('wheel', preventDefault);
+      window.removeEventListener('touchmove', preventDefault);
+      window.removeEventListener('keydown', preventDefault);
+    };
+  },
+
+  /**
+   * Снимает блокировку событий прокрутки
+   */
+  _enableScroll() {
+    if (this._enableScrollFn) {
+      this._enableScrollFn();
+      this._enableScrollFn = null;
+    }
   }
 };
