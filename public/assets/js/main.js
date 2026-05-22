@@ -255,6 +255,23 @@ async function loadPage(href, pushState = true) {
   document.documentElement.classList.add('is-transitioning');
   document.documentElement.classList.remove('page-ready');
 
+  // Плавно закрываем мобильное меню в начале перехода, чтобы оно затухло во время AJAX-запроса
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuToggle = document.getElementById('menu-toggle');
+  if (mobileMenu) {
+    // Временно отключаем транзишен, чтобы скрыть меню мгновенно без мерцаний при перерендере хедера
+    mobileMenu.style.transition = 'none';
+    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+    mobileMenu.classList.remove('opacity-100');
+    // Заставляем браузер применить стили мгновенно
+    void mobileMenu.offsetHeight;
+    mobileMenu.style.transition = '';
+  }
+  if (menuToggle) {
+    menuToggle.textContent = 'Меню';
+  }
+  document.body.style.overflow = '';
+
   // Останавливаем плавный скроллинг во время перехода
   if (window.lenis) {
     window.lenis.stop();
