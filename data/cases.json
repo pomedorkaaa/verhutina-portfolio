@@ -31,16 +31,19 @@
       "row1": [
         {
           "type": "image",
-          "src": "/assets/images/cases/futurist/row1-left.webp"
+          "src": "/assets/images/cases/futurist/row1-left.webp",
+          "aspectRatio": 0.7467
         },
         {
           "type": "video",
-          "src": "/assets/images/cases/futurist/row1-right.mp4"
+          "src": "/assets/images/cases/futurist/row1-right.mp4",
+          "aspectRatio": 0.5625
         }
       ],
       "row2": {
         "type": "image",
-        "src": "/assets/images/cases/futurist/row2.webp"
+        "src": "/assets/images/cases/futurist/row2.webp",
+        "aspectRatio": 1.5034
       }
     }
   },
@@ -62,16 +65,19 @@
       "row1": [
         {
           "type": "image",
-          "src": "/assets/images/cases/maison/row1-left.webp"
+          "src": "/assets/images/cases/maison/row1-left.webp",
+          "aspectRatio": 0.7467
         },
         {
           "type": "image",
-          "src": "/assets/images/cases/maison/row1-right.webp"
+          "src": "/assets/images/cases/maison/row1-right.webp",
+          "aspectRatio": 0.6709
         }
       ],
       "row2": {
         "type": "image",
-        "src": "/assets/images/cases/maison/row2.webp"
+        "src": "/assets/images/cases/maison/row2.webp",
+        "aspectRatio": 1.4874
       }
     }
   },
@@ -107,16 +113,19 @@
       "row1": [
         {
           "type": "video",
-          "src": "/assets/images/cases/mouse/row1-left.mp4"
+          "src": "/assets/images/cases/mouse/row1-left.mp4",
+          "aspectRatio": 0.5625
         },
         {
           "type": "video",
-          "src": "/assets/images/cases/mouse/row1-right.mp4"
+          "src": "/assets/images/cases/mouse/row1-right.mp4",
+          "aspectRatio": 0.5625
         }
       ],
       "row2": {
         "type": "image",
-        "src": "/assets/images/cases/mouse/row2.webp"
+        "src": "/assets/images/cases/mouse/row2.webp",
+        "aspectRatio": 1.3331
       }
     }
   },
@@ -155,16 +164,19 @@
       "row1": [
         {
           "type": "image",
-          "src": "/assets/images/cases/zavod/row1-left.webp"
+          "src": "/assets/images/cases/zavod/row1-left.webp",
+          "aspectRatio": 0.75
         },
         {
           "type": "video",
-          "src": "/assets/images/cases/zavod/row1-right.mp4"
+          "src": "/assets/images/cases/zavod/row1-right.mp4",
+          "aspectRatio": 0.5611
         }
       ],
       "row2": {
         "type": "image",
-        "src": "/assets/images/cases/zavod/row2.webp"
+        "src": "/assets/images/cases/zavod/row2.webp",
+        "aspectRatio": 1.3333
       }
     }
   },
@@ -244,16 +256,19 @@
       "row1": [
         {
           "type": "image",
-          "src": "/assets/images/cases/play-cafe/row1-left.webp"
+          "src": "/assets/images/cases/play-cafe/row1-left.webp",
+          "aspectRatio": 0.75
         },
         {
           "type": "video",
-          "src": "/assets/images/cases/play-cafe/row1-right.mp4"
+          "src": "/assets/images/cases/play-cafe/row1-right.mp4",
+          "aspectRatio": 0.5625
         }
       ],
       "row2": {
         "type": "image",
-        "src": "/assets/images/cases/play-cafe/row2.webp"
+        "src": "/assets/images/cases/play-cafe/row2.webp",
+        "aspectRatio": 1.499
       }
     }
   }

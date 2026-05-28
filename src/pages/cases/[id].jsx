@@ -16,14 +16,14 @@ export async function getStaticData() {
       if (mediaBlocks.row1) {
         mediaBlocks.row1 = await Promise.all(
           mediaBlocks.row1.map(async (item) => {
-            const ratio = await getAspectRatio(item.src);
+            const ratio = item.aspectRatio || await getAspectRatio(item.src);
             return { ...item, aspectRatio: ratio };
           })
         );
       }
 
       if (mediaBlocks.row2) {
-        const ratio = await getAspectRatio(mediaBlocks.row2.src);
+        const ratio = mediaBlocks.row2.aspectRatio || await getAspectRatio(mediaBlocks.row2.src);
         mediaBlocks.row2 = { ...mediaBlocks.row2, aspectRatio: ratio };
       }
 
