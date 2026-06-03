@@ -44,6 +44,10 @@
         "type": "image",
         "src": "/assets/images/cases/futurist/row2.webp",
         "aspectRatio": 1.5034
+      },
+      "row3": {
+        "type": "image",
+        "src": "/assets/images/cases/futurist/row3.webp"
       }
     }
   },

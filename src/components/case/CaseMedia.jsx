@@ -39,6 +39,13 @@ export default function CaseMedia({ mediaBlocks }) {
             <MediaItem item={mediaBlocks.row2} />
           </div>
         )}
+
+        {/* Третий ряд: еще один широкий блок */}
+        {mediaBlocks.row3 && mediaBlocks.row3.src && (
+          <div className="overflow-hidden w-full bg-neutral-900/50 mt-5 md:mt-[26px]" data-reveal-up>
+            <MediaItem item={mediaBlocks.row3} />
+          </div>
+        )}
       </div>
     </section>
   );

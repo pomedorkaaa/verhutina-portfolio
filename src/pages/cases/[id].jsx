@@ -27,6 +27,11 @@ export async function getStaticData() {
         mediaBlocks.row2 = { ...mediaBlocks.row2, aspectRatio: ratio };
       }
 
+      if (mediaBlocks.row3) {
+        const ratio = mediaBlocks.row3.aspectRatio || await getAspectRatio(mediaBlocks.row3.src);
+        mediaBlocks.row3 = { ...mediaBlocks.row3, aspectRatio: ratio };
+      }
+
       return { ...c, mediaBlocks };
     })
   );
