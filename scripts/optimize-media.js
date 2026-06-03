@@ -36,7 +36,55 @@ async function optimizeMedia() {
     const dirName = path.dirname(filePath);
     const fileNameWithoutExt = path.basename(filePath, ext);
 
-    // 1. Обработка изображений (png, jpg, jpeg) -> webp
+    const isTrail = dirName.split(path.sep).includes('trail');
+
+    // 1. Обработка изображений в папке trail (включая уже существующие .webp)
+    if (isTrail && ['.png', '.jpg', '.jpeg', '.webp'].includes(ext)) {
+      const destPath = path.join(dirName, `${fileNameWithoutExt}.webp`);
+      
+      try {
+        let shouldProcess = false;
+        
+        if (ext !== '.webp') {
+          shouldProcess = true;
+        } else {
+          const metadata = await sharp(filePath).metadata();
+          if (metadata.width !== 360) {
+            shouldProcess = true;
+          }
+        }
+        
+        if (shouldProcess) {
+          console.log(`\n[Шлейф (trail)] Оптимизация изображения: ${path.relative(TARGET_DIR, filePath)}`);
+          const tempPath = path.join(dirName, `temp_${fileNameWithoutExt}.webp`);
+          
+          await sharp(filePath)
+            .resize({ width: 360 })
+            .webp({ quality: 85 })
+            .toFile(tempPath);
+            
+          if (fs.existsSync(destPath) && ext !== '.webp') {
+            fs.unlinkSync(destPath);
+          }
+          if (ext === '.webp') {
+            fs.unlinkSync(filePath);
+          }
+          fs.renameSync(tempPath, destPath);
+          
+          if (ext !== '.webp') {
+            fs.unlinkSync(filePath);
+            console.log(`Исходный файл ${ext} удален.`);
+          }
+          console.log(`Успешно оптимизировано в WebP (360px): ${path.relative(TARGET_DIR, destPath)}`);
+          imageCount++;
+        }
+      } catch (error) {
+        console.error(`Ошибка при обработке изображения trail ${filePath}:`, error.message);
+      }
+      continue;
+    }
+
+    // 2. Обработка обычных изображений (png, jpg, jpeg) -> webp
     if (['.png', '.jpg', '.jpeg'].includes(ext)) {
       const destPath = path.join(dirName, `${fileNameWithoutExt}.webp`);
       
@@ -61,24 +109,42 @@ async function optimizeMedia() {
       }
     }
 
-    // 2. Обработка видео (mov) -> mp4
+    // 3. Обработка видео (mov) -> mp4
     if (ext === '.mov') {
       const destPath = path.join(dirName, `${fileNameWithoutExt}.mp4`);
       
       console.log(`\n[Видео] Обнаружен новый файл: ${path.relative(TARGET_DIR, filePath)}`);
-      console.log(`Сжатие видео через avconvert...`);
+      
+      // Проверяем наличие HandBrakeCLI в системе
+      let hasHandbrake = false;
       try {
-        const tempM4v = path.join(dirName, `${fileNameWithoutExt}_temp.m4v`);
-        
-        // Запуск встроенного в macOS конвертера с пресетом 720p HD
-        const cmd = `avconvert --preset PresetAppleM4V720pHD --source "${filePath}" --output "${tempM4v}"`;
-        execSync(cmd, { stdio: 'inherit' });
-        
-        // Переименовываем полученный m4v в mp4
-        if (fs.existsSync(destPath)) {
-          fs.unlinkSync(destPath); // Удаляем старый mp4, если он был
+        execSync('which HandBrakeCLI', { stdio: 'ignore' });
+        hasHandbrake = true;
+      } catch (e) {}
+
+      try {
+        if (hasHandbrake) {
+          console.log(`Сжатие видео через HandBrakeCLI (1080p, Web Optimized)...`);
+          const tempMp4 = path.join(dirName, `${fileNameWithoutExt}_temp.mp4`);
+          const cmd = `HandBrakeCLI -i "${filePath}" -o "${tempMp4}" -Z "General/Fast 1080p30" --optimize`;
+          execSync(cmd, { stdio: 'inherit' });
+          
+          if (fs.existsSync(destPath)) {
+            fs.unlinkSync(destPath);
+          }
+          fs.renameSync(tempMp4, destPath);
+        } else {
+          console.log(`HandBrakeCLI не найден. Сжатие видео через avconvert (720p)...`);
+          const tempM4v = path.join(dirName, `${fileNameWithoutExt}_temp.m4v`);
+          const cmd = `avconvert --preset PresetAppleM4V720pHD --source "${filePath}" --output "${tempM4v}"`;
+          execSync(cmd, { stdio: 'inherit' });
+          
+          if (fs.existsSync(destPath)) {
+            fs.unlinkSync(destPath);
+          }
+          fs.renameSync(tempM4v, destPath);
         }
-        fs.renameSync(tempM4v, destPath);
+        
         console.log(`Успешно создано и сжато: ${path.relative(TARGET_DIR, destPath)}`);
         
         // Удаляем исходный mov-файл

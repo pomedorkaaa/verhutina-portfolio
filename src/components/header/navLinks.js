@@ -4,7 +4,7 @@
 export const NAV_LINKS = [
   { href: "/", label: "ГЛАВНАЯ", mobileLabel: "Главная", key: "home" },
   { href: "/works", label: "КЕЙСЫ", mobileLabel: "Кейсы", key: "works", matchPrefix: true },
-  { href: "/archives", label: "ГАЛЕРЕЯ", mobileLabel: "Галерея", key: "archives" },
+  { href: "/archives", label: "РЕКОМЕНДАЦИИ", mobileLabel: "Рекомендации", key: "archives" },
   { href: "/contact", label: "КОНТАКТЫ", mobileLabel: "Контакты", key: "contact" },
 ];
 

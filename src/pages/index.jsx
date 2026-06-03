@@ -21,7 +21,7 @@ export default function Page() {
       <MoreProjects
         projects={casesData}
         title="КЕЙСЫ"
-        linkText="ВСЕ КЕЙСЫ"
+        linkText="Смотреть все кейсы"
         linkHref="/works"
         columns={2}
       />

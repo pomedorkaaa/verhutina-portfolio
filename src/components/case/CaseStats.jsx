@@ -21,7 +21,7 @@ export default function CaseStats({ stats, statsTitle }) {
           <p className="text-[32px] md:text-[40px] font-medium tracking-tighter-custom leading-[1.1] mb-1">
             {stat.value}
           </p>
-          <p className="text-[14px] font-normal tracking-tight-custom text-muted">
+          <p className="text-[14px] font-normal tracking-tight-custom text-muted whitespace-pre-line">
             {stat.label}
           </p>
         </div>

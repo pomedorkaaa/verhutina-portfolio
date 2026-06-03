@@ -19,11 +19,11 @@ window.CursorTrail = {
     // Массив изображений для шлейфа
     const trailImages = [
       'assets/images/trail/IMG_0933.webp',
-      'assets/images/trail/IMG_0938.webp',
+      'assets/images/trail/IMG_0937.webp',
       'assets/images/trail/IMG_0941.webp',
       'assets/images/trail/IMG_2989.webp',
       'assets/images/trail/IMG_7781.webp',
-      'assets/images/trail/IMG_7782.webp',
+      'assets/images/trail/IMG_0942.webp',
       'assets/images/trail/IMG_9079.webp',
       'assets/images/trail/IMG_9370.webp',
     ];

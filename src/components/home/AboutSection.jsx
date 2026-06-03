@@ -14,39 +14,44 @@ export default function AboutSection() {
 
           <div className="space-y-8">
             <div data-reveal-up>
-              <p className="text-[15px] font-normal tracking-tight-custom uppercase text-muted mb-3">Кто я</p>
+              <p className="text-[15px] font-normal tracking-tight-custom uppercase text-muted mb-3">КТО Я</p>
               <p className="text-[16px] font-medium tracking-tight-custom leading-[1.2]">
-                Я SMM-менеджер и креативный менеджер с опытом работы преимущественно в HoReCa: рестораны и кафе,
-                семейные
-                форматы, доставка, кофейные бренды, товары для дома.
+                SMM и креативный менеджер с опытом работы в HoReCa и FMCG: рестораны и кафе, семейные форматы, доставка питания, кофейный бренд, товары для дома.
               </p>
             </div>
 
             <div data-reveal-up>
               <p className="text-[15px] font-normal tracking-tight-custom uppercase text-muted mb-3">МОЯ ЗАДАЧА</p>
               <p className="text-[16px] font-medium tracking-tight-custom leading-[1.2]">
-                Превращать идеи и контент в измеримые результаты, которые помогают бизнесу расти и усиливать позиции на
-                рынке.
+                Превращать идеи в контент с измеримыми результатами, чтобы помогать бизнесу расти и усиливать позиции на рынке.
               </p>
             </div>
 
             <div data-reveal-up>
               <p className="text-[15px] font-normal tracking-tight-custom uppercase text-muted mb-3">ДЕЯТЕЛЬНОСТЬ</p>
               <p className="text-[16px] font-medium tracking-tight-custom leading-[1.2]">
-                6 лет в SMM.<br />
+                6+ лет в SMM.<br />
                 Имею опыт ведения 4–8 проектов параллельно.<br />
-                Работаю по полному циклу:<br />
+                Осуществляю полный цикл работ:<br />
                 стратегия → контент / продакшн → influence → KPI.
               </p>
             </div>
 
             <div data-reveal-up>
               <p className="text-[15px] font-normal tracking-tight-custom uppercase text-muted mb-3">ОПЫТ РАБОТЫ</p>
-              <ul className="text-[16px] font-medium tracking-tight-custom leading-[1.2] space-y-2">
-                <li><span className="text-muted">(2020 - 2022)</span> SMM Manager в IMdepot</li>
-                <li><span className="text-muted">(2021 - 2022)</span> Influence & Internet marketing EnjoyBox</li>
-                <li><span className="text-muted">(2023 – 2026)</span> Social Media & Content Manager в MCorporation</li>
-                <li><span className="text-muted">(2026 - now)</span> Head of Social Media в MCorporation</li>
+              <ul className="text-[16px] font-medium tracking-tight-custom leading-[1.2] space-y-3">
+                <li>
+                  <span className="text-muted">(2020 - 2022)</span> SMM-менеджер в IMdepot <span className="text-muted text-[14px] font-normal">(товары для дома)</span>
+                </li>
+                <li>
+                  <span className="text-muted">(2021 - 2022)</span> Influence-менеджер & Интернет-маркетолог в EnjoyBox <span className="text-muted text-[14px] font-normal">(доставка питания)</span>
+                </li>
+                <li>
+                  <span className="text-muted">(2023 – 2025)</span> SMM-менеджер & Контент-менеджер в digital-агентстве MCorporation
+                </li>
+                <li>
+                  <span className="text-muted">(2026 - now)</span> Head of SMM в агентстве
+                </li>
               </ul>
             </div>
           </div>

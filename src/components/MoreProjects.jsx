@@ -13,8 +13,8 @@ import CaseCard from "./CaseCard";
  */
 export default function MoreProjects({
   projects,
-  title = "More projects",
-  linkText = "See all works",
+  title = "ДРУГИЕ КЕЙСЫ",
+  linkText = "Смотреть все кейсы",
   linkHref = "/works",
   columns = 3,
 }) {

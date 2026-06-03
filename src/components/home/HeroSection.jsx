@@ -1,8 +1,3 @@
-
-/**
- * Hero-секция главной страницы: имя и должность.
- * Sticky-позиционирование и анимация split-text обрабатываются в main.js.
- */
 export default function HeroSection() {
   return (
     <section className="hero !sticky top-0 -z-40 min-h-screen px-5 flex flex-col justify-center items-center">
